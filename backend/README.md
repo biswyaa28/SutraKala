@@ -215,7 +215,7 @@ const orderData = {
     name: 'John Doe',
     address_line1: '123 Main Street',
     address_line2: 'Apt 4B',
-    city: 'Mumbai',
+    city: 'Jammu',
     state: 'Maharashtra',
     pincode: '400050',
     phone: '+91 9876543210',
@@ -269,7 +269,7 @@ const newAddress = await addAddress({
   name: 'John Doe',
   phone: '+91 9876543210',
   address_line1: '123 Main Street',
-  city: 'Mumbai',
+  city: 'Jammu',
   state: 'Maharashtra',
   pincode: '400050',
   is_default: true

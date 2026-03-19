@@ -60,7 +60,7 @@
 - 📏 **Proper Contrast** - Text meets WCAG AA contrast requirements
 
 ### Indian Context
-- 🇮🇳 **Local Business** - Mumbai, Maharashtra address
+- 🇮🇳 **Local Business** - Jammu, Maharashtra address
 - 📞 **Indian Phone Format** - +91 prefix validation
 - 💳 **UPI Ready** - Payment options for Indian market
 - 🚚 **India Post** - Shipping integration ready
@@ -345,7 +345,7 @@ const businessInfo = {
   name: 'CraftedLoop',
   phone: '+91 9876543210',
   email: 'hello@craftedloop.in',
-  address: 'Mumbai, Maharashtra',
+  address: 'Jammu, Maharashtra',
   whatsapp: '919876543210'
 };
 ```
@@ -608,7 +608,7 @@ SOFTWARE.
 
 **CraftedLoop**
 
-- 📍 Address: 123 Artisan Lane, Bandra West, Mumbai, Maharashtra 400050, India
+- 📍 Address: 123 Artisan Lane, Bandra West, Jammu, Maharashtra 400050, India
 - 📧 Email: hello@craftedloop.in
 - 📱 Phone: +91 98765 43210
 - 💬 WhatsApp: [Chat with us](https://wa.me/919876543210)
@@ -642,7 +642,7 @@ SOFTWARE.
 
 <div align="center">
 
-**Made with ❤️ in Mumbai, India**
+**Made with ❤️ in Jammu, India**
 
 [Back to top](#-craftedloop---handmade-crochet-e-commerce-website)
 
