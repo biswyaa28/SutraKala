@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="CraftedLoop - Handmade crochet products from Mumbai, India. Shop beautiful handmade items including scarves, toys, home decor, and baby accessories.">
+  <meta name="keywords" content="crochet, handmade, India, Mumbai, artisan, crafts, home decor, baby items">
+  <title>CraftedLoop | Handmade Crochet from India</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="#" aria-label="SutraKala Home">
+            <img src="assets/images/logo.jpg?v=2" alt="Logo" class="site-logo">
+            <span class="logo-text">SutraKala</span>
+          </a>
+        </div>
+
+        <nav class="nav-menu" role="navigation" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li><a href="#products" class="nav-link">Products</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button class="cart-button" aria-label="Shopping cart" id="cartBtn">
+            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+            <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+          </button>
+
+          <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="mobileMenuToggle">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-list">
+          <li><a href="#products" class="mobile-nav-link">Products</a></li>
+          <li><a href="#about" class="mobile-nav-link">About</a></li>
+          <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+          <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h1 id="hero-title" class="hero-title">Sutra kala loom of art loomed with heart.</h1>
+        <p class="hero-subtitle">From the city of temples, सूत्र से कला तक
+        </p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary">Shop Collection</a>
+          <a href="#about" class="btn btn-outline">Our Story</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products" aria-labelledby="products-title">
+      <div class="container">
+        <div class="section-header fade-in-up">
+          <h2 id="products-title" class="section-title">Our Products</h2>
+          <p class="section-subtitle">Each piece is lovingly handcrafted with premium yarn</p>
+        </div>
+
+        <div class="products-grid fade-in-up delay-1">
+          <!-- Product 1 -->
+          <article class="product-card" data-product-id="1">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=400&h=400&fit=crop"
+                alt="Cream colored crochet infinity scarf with delicate lace pattern" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Elegant Infinity Scarf</h3>
+              <p class="product-description">Soft cream-colored scarf with intricate lace detailing. Perfect for any
+                season.</p>
+              <p class="product-price">₹1,299</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Elegant Infinity Scarf" data-price="1299">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 2 -->
+          <article class="product-card" data-product-id="2">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1558223689-8f8d1a9c6f5e?w=400&h=400&fit=crop"
+                alt="Pink and white crochet stuffed bunny and bear toys in a basket" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Adorable Amigurumi Set</h3>
+              <p class="product-description">Handmade stuffed toys in pastel colors. Safe and soft for little ones.</p>
+              <p class="product-price">₹899</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Adorable Amigurumi Set" data-price="899">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 3 -->
+          <article class="product-card" data-product-id="3">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1579656381226-5fc703648680?w=400&h=400&fit=crop"
+                alt="Lavender crochet cushion cover with mandala design" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Mandala Cushion Cover</h3>
+              <p class="product-description">Beautiful lavender cushion with traditional mandala pattern. 16x16 inches.
+              </p>
+              <p class="product-price">₹1,599</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Mandala Cushion Cover" data-price="1599">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 4 -->
+          <article class="product-card" data-product-id="4">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop"
+                alt="White crochet baby booties with pink floral embroidery" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Baby Booties Set</h3>
+              <p class="product-description">Delicate white booties with floral embroidery. Perfect for newborns to 6
+                months.</p>
+              <p class="product-price">₹699</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Baby Booties Set" data-price="699">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 5 -->
+          <article class="product-card" data-product-id="5">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1605218427368-35b861218042?w=400&h=400&fit=crop"
+                alt="Mint green crochet table runner with scalloped edges" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Table Runner</h3>
+              <p class="product-description">Elegant mint green table runner with scalloped edges. 60 inches long.</p>
+              <p class="product-price">₹1,899</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Table Runner" data-price="1899">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 6 -->
+          <article class="product-card" data-product-id="6">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1616606015525-4c0e9f8f8a9e?w=400&h=400&fit=crop"
+                alt="Peach colored crochet market bag with handles" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Market Tote Bag</h3>
+              <p class="product-description">Eco-friendly peach colored shopping bag. Sturdy and stylish.</p>
+              <p class="product-price">₹1,099</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Market Tote Bag" data-price="1099">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 7 -->
+          <article class="product-card" data-product-id="7">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=400&h=400&fit=crop"
+                alt="Pink crochet headband with flower detail" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Floral Headband</h3>
+              <p class="product-description">Pretty pink headband adorned with crochet flowers. One size fits all.</p>
+              <p class="product-price">₹499</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Floral Headband" data-price="499">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 8 -->
+          <article class="product-card" data-product-id="8">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=400&h=400&fit=crop"
+                alt="Lavender crochet wall hanging with boho design" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Boho Wall Hanging</h3>
+              <p class="product-description">Statement wall decor in lavender with bohemian tassels. 24 inches.</p>
+              <p class="product-price">₹2,199</p>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-add-to-cart" data-product="Boho Wall Hanging" data-price="2199">
+                  <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-content fade-in-up">
+          <div class="about-text">
+            <h2 id="about-title">Our Story</h2>
+            <p>Founded in the heart of Mumbai, CraftedLoop began as a small passion project in 2018. What started as a
+              hobby during quiet afternoons has blossomed into a thriving community of skilled artisans dedicated to
+              preserving the beautiful art of crochet.</p>
+            <p>Each piece in our collection is lovingly handcrafted by talented women artisans from Maharashtra. We
+              believe in sustainable fashion, fair wages, and the timeless beauty of handmade products.</p>
+            <p>Our yarn is carefully sourced from ethical suppliers, ensuring that every stitch contributes to a better
+              world. When you choose CraftedLoop, you're not just buying a product – you're supporting traditional
+              craftsmanship and empowering local communities.</p>
+            <div class="about-stats">
+              <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Happy Customers</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">Artisans</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Handmade</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1605218427368-35b861218042?w=600&h=600&fit=crop"
+              alt="Artisan working on crochet project with colorful yarn" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-header fade-in-up">
+          <h2 id="gallery-title" class="section-title">Gallery</h2>
+          <p class="section-subtitle">A glimpse into our creative process and happy customers</p>
+        </div>
+
+        <div class="gallery-grid fade-in-up delay-1">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=400&h=400&fit=crop"
+              alt="Close-up of hands crocheting with pink yarn" loading="lazy">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1558223689-8f8d1a9c6f5e?w=400&h=400&fit=crop"
+              alt="Colorful yarn balls arranged on wooden table" loading="lazy">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1579656381226-5fc703648680?w=400&h=400&fit=crop"
+              alt="Finished crochet blanket in pastel colors" loading="lazy">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop"
+              alt="Baby wearing crochet hat and booties" loading="lazy">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=400&h=400&fit=crop"
+              alt="Crochet workshop with artisans working together" loading="lazy">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1616606015525-4c0e9f8f8a9e?w=400&h=400&fit=crop"
+              alt="Display of various crochet products at market" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-content fade-in-up">
+          <div class="contact-info">
+            <h2 id="contact-title">Get in Touch</h2>
+            <p class="contact-intro">Have a question or custom order request? We'd love to hear from you!</p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt contact-icon" aria-hidden="true"></i>
+                <div>
+                  <strong>Address</strong>
+                  <p>123 Artisan Lane, Bandra West<br>Mumbai, Maharashtra 400050<br>India</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <i class="fas fa-phone contact-icon" aria-hidden="true"></i>
+                <div>
+                  <strong>Phone</strong>
+                  <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <i class="fas fa-envelope contact-icon" aria-hidden="true"></i>
+                <div>
+                  <strong>Email</strong>
+                  <p><a href="mailto:hello@craftedloop.in">hello@craftedloop.in</a></p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <i class="fab fa-whatsapp contact-icon" aria-hidden="true"></i>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <p><a href="https://wa.me/919876543210" target="_blank" rel="noopener">Chat with us</a></p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <i class="fas fa-clock contact-icon" aria-hidden="true"></i>
+                <div>
+                  <strong>Business Hours</strong>
+                  <p>Monday - Saturday: 10:00 AM - 7:00 PM<br>Sunday: By appointment</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="social-link" aria-label="Follow us on Pinterest"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+
+          <div class="contact-form-wrapper">
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-group">
+                <label for="name">Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required aria-required="true" placeholder="Your name">
+                <span class="error-message" id="nameError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required aria-required="true" placeholder="your@email.com">
+                <span class="error-message" id="emailError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" pattern="[0-9+\-\s()]+">
+                <span class="error-message" id="phoneError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject <span class="required">*</span></label>
+                <select id="subject" name="subject" required aria-required="true">
+                  <option value="">Select a subject</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="custom">Custom Order</option>
+                  <option value="wholesale">Wholesale</option>
+                  <option value="support">Customer Support</option>
+                </select>
+                <span class="error-message" id="subjectError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message <span class="required">*</span></label>
+                <textarea id="message" name="message" required aria-required="true" placeholder="Your message..."
+                  rows="5"></textarea>
+                <span class="error-message" id="messageError"></span>
+              </div>
+
+              <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3><i class="fas fa-yarn" aria-hidden="true"></i> CraftedLoop</h3>
+          <p>Handmade crochet products crafted with love in Mumbai, India. Supporting local artisans and traditional
+            craftsmanship.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Customer Care</h3>
+          <ul class="footer-links">
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns & Exchanges</a></li>
+            <li><a href="#">Care Instructions</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Connect With Us</h3>
+          <div class="social-links footer-social">
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+            <a href="#" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 CraftedLoop. All rights reserved. | Made with <i class="fas fa-heart" aria-hidden="true"></i> in
+          Mumbai</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="modal" id="cartModal" role="dialog" aria-labelledby="cartModalTitle" aria-modal="true" hidden>
+    <div class="modal-overlay" id="cartModalOverlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="cartModalTitle">Your Shopping Cart</h2>
+        <button class="modal-close" id="cartModalClose" aria-label="Close cart">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="cart-items" id="cartItems">
+          <!-- Cart items will be inserted here -->
+        </div>
+        <div class="cart-empty" id="cartEmpty">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+          <p>Your cart is empty</p>
+          <a href="#products" class="btn btn-primary">Browse Products</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotal">₹0</span>
+        </div>
+        <button class="btn btn-primary btn-checkout" id="checkoutBtn">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i> Checkout via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive" hidden>
+    <i class="fas fa-check-circle" aria-hidden="true"></i>
+    <span class="toast-message" id="toastMessage"></span>
+  </div>
+
+  <!-- JavaScript -->
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

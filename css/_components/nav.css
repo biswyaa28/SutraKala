@@ -1,0 +1,37 @@
+/* css/_components/nav.css */
+.nav-list {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  padding: var(--spacing-xs) 0;
+  transition: color var(--transition-fast);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-mint), var(--color-lavender));
+  transition: width var(--transition-fast);
+}
+.nav-link:hover, .nav-link:focus { color: var(--color-mint); }
+.nav-link:hover::after { width: 100%; }
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-divider);
+  padding: var(--spacing-md) 0;
+}
+.mobile-menu.active {
+  display: block;
+  animation: slideDown var(--transition-normal);
+}

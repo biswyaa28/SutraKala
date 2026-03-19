@@ -1,0 +1,61 @@
+/* css/_typography.css */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+}
+
+h1 { font-size: var(--font-size-h1); font-weight: 600; }
+h2 { font-size: var(--font-size-h2); font-weight: 500; }
+h3 { font-size: var(--font-size-h3); font-weight: 500; }
+h4 { font-size: var(--font-size-h4); font-weight: 500; }
+
+small { font-size: var(--font-size-sm); font-weight: 300; }
+.caption { font-size: var(--font-size-caption); font-weight: 300; color: var(--color-text-tertiary); }
+
+.text-shadow-dark {
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.7);
+}
+
+.text-handwritten {
+  font-family: var(--font-handwritten);
+  font-size: 3rem; 
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transform: rotate(-2deg);
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.text-artisan {
+  background: var(--texture-paper);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: rgba(26, 26, 26, 0.9);
+}
+
+blockquote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  position: relative;
+  padding-left: 20px;
+}
+blockquote::before {
+  content: '"';
+  font-family: Georgia, serif;
+  font-size: 3em;
+  color: var(--color-mint);
+  position: absolute;
+  left: -20px;
+  top: -10px;
+}

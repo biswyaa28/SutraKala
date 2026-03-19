@@ -1,0 +1,88 @@
+# ========================================
+# CraftedLoop - Git Ignore File
+# ========================================
+
+# Environment variables (CRITICAL - never commit!)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
+
+# Supabase
+.supabase
+functions/*/node_modules
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Production
+dist/
+build/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Misc
+.vercel
+*.local
+
+# Secrets
+*.pem
+*.key
+secrets/
+
+# Database
+*.sqlite
+*.sqlite3
+
+# Uploads
+uploads/
+temp/
+tmp/
+
+# Backend specific
+backend/.env
+backend/functions/*/node_modules
+backend/supabase/functions/*/node_modules

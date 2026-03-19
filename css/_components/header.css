@@ -1,0 +1,117 @@
+/* css/_components/header.css */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-sticky);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-1);
+  transition: all var(--transition-normal);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-mint);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  transition: transform var(--transition-hover);
+}
+
+.site-logo {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  transition: transform var(--transition-hover);
+  border-radius: 50%;
+  background-color: var(--color-lavender);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--color-text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.site-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  color: var(--color-text-primary);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  margin-left: var(--spacing-xs);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.cart-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition-hover), transform var(--transition-hover);
+}
+
+.cart-button:hover {
+  color: var(--color-mint);
+  transform: scale(1.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: var(--gradient-premium);
+  color: var(--color-text-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-1);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+}

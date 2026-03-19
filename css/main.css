@@ -1,0 +1,26 @@
+/* css/main.css */
+@import url('_variables.css');
+@import url('_mixins.css');
+@import url('_typography.css');
+@import url('_layout.css');
+
+@import url('_components/button.css');
+@import url('_components/card.css');
+@import url('_components/form.css');
+@import url('_components/nav.css');
+@import url('_components/hero.css');
+@import url('_components/header.css');
+@import url('_components/footer.css');
+@import url('_components/animations.css');
+
+@import url('_sections/hero.css');
+@import url('_sections/products.css');
+@import url('_sections/about.css');
+@import url('_sections/gallery.css');
+@import url('_sections/contact.css');
+
+/* Base Overrides */
+body {
+  background-color: var(--color-cream);
+  background-image: var(--texture-woven);
+}

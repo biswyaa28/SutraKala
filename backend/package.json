@@ -1,0 +1,30 @@
+{
+  "name": "craftedloop-backend",
+  "version": "1.0.0",
+  "description": "Backend services for CraftedLoop e-commerce platform",
+  "type": "module",
+  "main": "supabase-client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "node scripts/setup.js",
+    "seed": "node scripts/seed-data.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "crochet",
+    "handmade",
+    "supabase",
+    "india"
+  ],
+  "author": "CraftedLoop",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

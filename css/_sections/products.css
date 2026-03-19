@@ -1,0 +1,23 @@
+/* css/_sections/products.css */
+.products-section {
+  padding: var(--spacing-xxxl) 0;
+  background-color: var(--color-surface); /* Cream fallback matches handmade baseline */
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-xl);
+}
+.products-grid > .product-card {
+  grid-column: span 12;
+}
+@media (min-width: 768px) {
+  .products-grid > .product-card { grid-column: span 6; }
+}
+@media (min-width: 1024px) {
+  .products-grid > .product-card { grid-column: span 4; }
+}
+@media (min-width: 1440px) {
+  .products-grid > .product-card { grid-column: span 3; }
+}

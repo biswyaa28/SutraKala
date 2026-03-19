@@ -1,0 +1,37 @@
+/* css/_components/hero.css */
+/* Hero Specific Utility Components */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+.hero-title {
+  font-family: var(--font-handwritten);
+  font-size: 4rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+  transform: rotate(-2deg);
+  display: inline-block;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xl);
+  font-weight: 500;
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
+}
+.hero-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+  opacity: 0;
+}
