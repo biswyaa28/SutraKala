@@ -12,6 +12,28 @@
 .products-grid > .product-card {
   grid-column: span 12;
 }
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .products-grid > .product-card {
+    grid-column: span 1;
+  }
+}
+
+/* Mid-size phones / large phones: 2 columns */
+@media (min-width: 481px) and (max-width: 767px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .products-grid > .product-card {
+    grid-column: span 1;
+  }
+}
+
 @media (min-width: 768px) {
   .products-grid > .product-card { grid-column: span 6; }
 }

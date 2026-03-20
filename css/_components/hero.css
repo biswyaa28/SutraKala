@@ -35,3 +35,41 @@
   animation: fadeInUp 0.8s ease 0.4s forwards;
   opacity: 0;
 }
+
+/* ── Mobile Hero Overrides ── */
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 0 16px;
+    padding-top: 60px;
+  }
+  .hero-title {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    transform: rotate(0deg);
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .hero-buttons .btn {
+    padding: 12px 20px;
+    font-size: 0.85rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}

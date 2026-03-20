@@ -1,22 +1,13 @@
 /* css/_components/footer.css */
 .footer {
-  background-color: var(--color-mint);
-  color: var(--color-text-primary);
-  padding: var(--spacing-xxl) 0 var(--spacing-md);
-  margin-top: var(--spacing-xxxl);
+  background: linear-gradient(160deg, var(--color-sage) 0%, var(--color-mint) 50%, var(--color-lavender) 100%);
+  color: var(--color-white);
+  padding: var(--spacing-xxl) 0 var(--spacing-lg);
+  /* No margin-top — contact section already ends purple, gap would show page background */
   position: relative;
 }
 .footer::before {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23FDFBFD' class='shape-fill'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover;
-  background-position: center bottom;
-  transform: rotate(180deg);
+  display: none; /* SVG wave removed — causes floating dark lines between sections */
 }
 
 .footer-compact {
@@ -42,7 +33,7 @@
   font-family: var(--font-primary);
   font-size: var(--font-size-h3);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -55,8 +46,8 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .footer-logo:hover .spin-on-hover {
@@ -65,18 +56,25 @@
 
 .footer-nav {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-lg);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .footer-nav {
+    flex-direction: row;
+    gap: var(--spacing-lg);
+  }
 }
 
 .footer-link {
-  color: var(--color-text-primary);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-weight: 500;
   position: relative;
   padding: var(--spacing-xs) 0;
-  transition: color var(--transition-base);
+  transition: color 0.3s ease;
 }
 
 .footer-link::after {
@@ -86,13 +84,13 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: var(--color-primary);
+  background-color: var(--color-white);
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   transform: translateX(-50%);
 }
 
 .footer-link:hover {
-  color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .footer-link:hover::after {
@@ -111,23 +109,25 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: var(--color-white);
-  color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .social-icon:hover {
-  transform: translateY(-5px);
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px) scale(1.1);
+  background-color: var(--color-white);
+  color: var(--color-mint);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-color: transparent;
 }
 
 .footer-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);
   margin: var(--spacing-lg) 0;
 }
 
@@ -137,7 +137,9 @@
   align-items: center;
   gap: var(--spacing-sm);
   font-size: var(--font-size-sm);
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.7);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 @media (min-width: 768px) {
@@ -166,4 +168,97 @@
   30% { transform: scale(1.2); }
   40% { transform: scale(1); }
   100% { transform: scale(1); }
+}
+
+/* ── Mobile + Tablet footer (≤768px) ── */
+/* Fix: white gap + SVG wave blobs bleeding between contact & footer */
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 0;
+  }
+  .footer::before {
+    display: none; /* hide the wave — it bleeds as dark blobs on mobile */
+  }
+}
+
+/* ── Small mobile footer (≤480px) ── */
+@media (max-width: 480px) {
+  .footer {
+    padding: 40px 24px 28px;
+  }
+
+  /* Stack brand / nav / social vertically */
+  .footer-compact {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  /* Brand */
+  .footer-brand {
+    text-align: center;
+  }
+  .footer-brand .footer-logo {
+    font-size: 1.25rem;
+    gap: 10px;
+    justify-content: center;
+  }
+  .footer-site-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Nav – single row, allow wrapping with separator dots */
+  .footer-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+  }
+  .footer-link {
+    font-size: 0.82rem;
+    padding: 8px 10px;
+    letter-spacing: 0.02em;
+  }
+  /* Separator dot between links */
+  .footer-link + .footer-link::before {
+    content: '·';
+    position: relative;
+    margin-right: 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 700;
+    font-size: 1rem;
+    pointer-events: none;
+  }
+  .footer-link::after {
+    display: none; /* Hide underline effect on mobile for cleaner look */
+  }
+
+  /* Social icons */
+  .footer-social-compact {
+    gap: 14px;
+    justify-content: center;
+  }
+  .social-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.05rem;
+  }
+
+  .footer-divider {
+    margin: 14px 0;
+  }
+
+  /* Bottom copyright bar */
+  .footer-bottom-compact {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 0.78rem;
+    gap: 4px;
+    padding-top: 18px;
+  }
 }

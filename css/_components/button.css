@@ -76,3 +76,20 @@
   padding: 16px 32px;
   font-size: var(--font-size-lg);
 }
+
+@media (max-width: 480px) {
+  .btn {
+    min-height: 44px;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  .btn-primary {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+}

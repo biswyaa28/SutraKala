@@ -52,3 +52,30 @@
   margin-top: var(--spacing-xs);
   min-height: 20px;
 }
+
+@media (max-width: 480px) {
+  .contact-form-wrapper {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+  .btn-submit {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+  /* 44px minimum tap target for form controls */
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem; /* Prevents iOS auto-zoom on focus */
+  }
+  .contact-form input,
+  .contact-form select {
+    min-height: 44px;
+    padding: 10px 0;
+  }
+  .contact-form textarea {
+    min-height: 100px;
+  }
+}

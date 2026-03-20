@@ -1,5 +1,25 @@
 /* css/_typography.css */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+/**
+ * Devanagari unicode-range override
+ * Activates Noto Sans Devanagari only for Devanagari script characters
+ * (U+0900–U+097F, U+0980–U+09FF Matras, U+A8E0–U+A8FF Vedic marks)
+ * All other characters fall through to Inter / Playfair as normal.
+ */
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  font-style:  normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local('Noto Sans Devanagari'),
+       url('https://fonts.gstatic.com/s/notosansdevanagari/v25/TuGOUUFzXI5FBtUq5a8iH8R1EtQofRuI.woff2') format('woff2');
+  unicode-range:
+    U+0900-097F,  /* Devanagari */
+    U+0980-09FF,  /* Bengali (shared matras) */
+    U+A8E0-A8FF,  /* Devanagari Extended */
+    U+1CD0-1CFF;  /* Vedic Extensions */
+}
 
 body {
   font-family: var(--font-primary);
@@ -58,4 +78,18 @@ blockquote::before {
   position: absolute;
   left: -20px;
   top: -10px;
+}
+/* ── Devanagari Script ── */
+/* Applied via <span lang="hi" class="devanagari"> around Hindi text */
+.devanagari {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-weight: 500;
+  /* Noto Devanagari renders slightly smaller optically — nudge it up */
+  font-size: 1.05em;
+  /* Tighter line-height so matras (vowel marks above letters) don't clip */
+  line-height: 1.4;
+  /* Slight letter-spacing for elegance — Devanagari benefits from breathing room */
+  letter-spacing: 0.01em;
+  /* Ensure consistent vertical alignment alongside Latin text */
+  vertical-align: baseline;
 }

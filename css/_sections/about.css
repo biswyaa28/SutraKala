@@ -6,9 +6,16 @@
 }
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-xxl);
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
   align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xxl);
+  }
 }
 .about-text h2 {
   font-family: var(--font-heading);
@@ -86,4 +93,42 @@
   height: 100%;
   object-fit: cover;
   aspect-ratio: 1;
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 40px 16px;
+  }
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+  }
+  .about-stats {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .stat-item {
+    padding: 8px;
+  }
+  .stat-number {
+    font-size: 2rem;
+  }
+  /* Disable 3D transform on mobile — causes glitches & is invisible */
+  .about-image {
+    transform: none !important;
+    border-radius: 16px;
+  }
+  .about-image:hover {
+    transform: none !important;
+  }
 }
