@@ -38,14 +38,15 @@ export class ShoppingCart {
                     });
                 }
                 
-                this.openModal();
+                // Show toast notification instead of redirecting
+                this.showToast(`${product} added to cart!`);
             });
         });
 
-        // Toggle modal
-        $('#cartBtn')?.addEventListener('click', () => this.openModal());
-        $('#cartModalClose')?.addEventListener('click', () => this.closeModal());
-        $('#cartModalOverlay')?.addEventListener('click', () => this.closeModal());
+        // Cart button - navigate to cart page
+        $('#cartBtn')?.addEventListener('click', () => {
+            window.location.href = 'cart.html';
+        });
 
         // Checkout logic
         $('#checkoutBtn')?.addEventListener('click', () => this.checkout());
@@ -169,5 +170,23 @@ export class ShoppingCart {
         this.items = [];
         this.saveAndRender();
         this.closeModal();
+    }
+    
+    showToast(message) {
+        const toast = $('#toast');
+        const toastMessage = $('#toastMessage');
+        
+        if (!toast || !toastMessage) return;
+        
+        toastMessage.textContent = message;
+        toast.hidden = false;
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.hidden = true;
+            }, 300);
+        }, 3000);
     }
 }
