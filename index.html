@@ -1,393 +1,721 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
+        />
+        <meta
+            name="description"
+            content="SutraKala — Handmade crochet products from Jammu, India. Shop beautiful handcrafted scarves, toys, home décor, and baby accessories."
+        />
+        <meta
+            name="keywords"
+            content="crochet, handmade, India, Jammu, artisan, crafts, home decor, baby items, sutrakala"
+        />
+        <title>SutraKala | Handmade Crochet from Jammu</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="description"
-    content="SutraKala — Handmade crochet products from Jammu, India. Shop beautiful handcrafted scarves, toys, home décor, and baby accessories.">
-  <meta name="keywords" content="crochet, handmade, India, Jammu, artisan, crafts, home decor, baby items, sutrakala">
-  <title>SutraKala | Handmade Crochet from Jammu</title>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/main.css">
-</head>
+    <body id="top">
+        <!-- Skip Link for Accessibility -->
+        <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<body id="top">
-  <!-- Skip Link for Accessibility -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+        <!-- Header -->
+        <header class="header" role="banner">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="index.html" aria-label="SutraKala Home">
+                            <img
+                                src="assets/images/logo.jpg?v=2"
+                                alt="Logo"
+                                class="site-logo"
+                            />
+                            <span class="logo-text">SutraKala</span>
+                        </a>
+                    </div>
 
-  <!-- Header -->
-  <header class="header" role="banner">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <a href="index.html" aria-label="SutraKala Home">
-            <img src="assets/images/logo.jpg?v=2" alt="Logo" class="site-logo">
-            <span class="logo-text">SutraKala</span>
-          </a>
-        </div>
+                    <nav
+                        class="nav-menu"
+                        role="navigation"
+                        aria-label="Main navigation"
+                    >
+                        <ul class="nav-list">
+                            <li>
+                                <a href="shop.html" class="nav-link">Shop</a>
+                            </li>
+                            <li><a href="#about" class="nav-link">About</a></li>
+                            <li>
+                                <a href="#gallery" class="nav-link">Gallery</a>
+                            </li>
+                            <li>
+                                <a href="#contact" class="nav-link">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
 
-        <nav class="nav-menu" role="navigation" aria-label="Main navigation">
-          <ul class="nav-list">
-            <li><a href="shop.html" class="nav-link">Shop</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#gallery" class="nav-link">Gallery</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-          </ul>
-        </nav>
+                    <div class="header-actions">
+                        <!-- Auth UI Container (Login button / User avatar) -->
+                        <div
+                            id="authUIContainer"
+                            class="auth-ui-container"
+                        ></div>
 
-        <div class="header-actions">
-          <button class="cart-button" aria-label="Shopping cart" id="cartBtn">
-            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
-            <span class="cart-count" id="cartCount" aria-live="polite">0</span>
-          </button>
+                        <button
+                            class="cart-button"
+                            aria-label="Shopping cart"
+                            id="cartBtn"
+                        >
+                            <i
+                                class="fas fa-shopping-bag"
+                                aria-hidden="true"
+                            ></i>
+                            <span
+                                class="cart-count"
+                                id="cartCount"
+                                aria-live="polite"
+                                >0</span
+                            >
+                        </button>
 
-          <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="mobileMenuToggle">
-            <i class="fas fa-bars" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
+                        <button
+                            class="mobile-menu-toggle"
+                            aria-label="Toggle menu"
+                            aria-expanded="false"
+                            id="mobileMenuToggle"
+                        >
+                            <i class="fas fa-bars" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
 
-      <!-- Mobile Menu -->
-      <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-nav-list">
-          <li><a href="shop.html" class="mobile-nav-link">Shop</a></li>
-          <li><a href="#about" class="mobile-nav-link">About</a></li>
-          <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
-          <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <h1 id="hero-title" class="hero-title">Sutra kala loom of art loomed with heart.</h1>
-        <p class="hero-subtitle">From the city of temples, <span lang="hi" class="devanagari">सूत्र से कला तक</span></p>
-        <div class="hero-buttons">
-          <a href="shop.html" class="btn btn-primary">Shop Collection</a>
-          <a href="#about" class="btn btn-outline">Our Story</a>
-        </div>
-      </div>
-      <div class="hero-bouquet-wrapper">
-        <img src="assets/images/bouquet.png" alt="Crochet Bouquet" class="hero-bouquet" id="heroBouquet"
-          loading="eager">
-      </div>
-    </section>
-
-    <!-- Brand CTA Section (replaces product grid) -->
-    <section class="brand-cta-section" id="products" aria-labelledby="cta-heading">
-
-      <!-- Decorative thread divider -->
-      <div class="thread-divider" aria-hidden="true">
-        <svg viewBox="0 0 900 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,20 C150,5 300,35 450,20 C600,5 750,35 900,20" stroke="#8E44AD" stroke-width="1" fill="none" opacity="0.5"/>
-          <path d="M0,24 C150,9 300,39 450,24 C600,9 750,39 900,24" stroke="#D2B4DE" stroke-width="0.5" fill="none" opacity="0.3"/>
-        </svg>
-      </div>
-
-      <div class="container">
-        <div class="brand-cta-inner fade-in-up">
-          <p class="cta-eyebrow">Handwoven with intention</p>
-          <h2 id="cta-heading" class="cta-heading">Discover our textile collection</h2>
-          <p class="cta-description">Each piece is born from hours of careful craft — soft yarns, patient hands, and a love for the handmade. Browse our full collection and find something made just for you.</p>
-          <a href="shop.html" class="btn btn-cta-shop">
-            Shop Now <span class="cta-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Decorative thread divider (bottom) -->
-      <div class="thread-divider thread-divider--bottom" aria-hidden="true">
-        <svg viewBox="0 0 900 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,20 C150,35 300,5 450,20 C600,35 750,5 900,20" stroke="#8E44AD" stroke-width="1" fill="none" opacity="0.5"/>
-          <path d="M0,16 C150,31 300,1 450,16 C600,31 750,1 900,16" stroke="#D2B4DE" stroke-width="0.5" fill="none" opacity="0.3"/>
-        </svg>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about-section" id="about" aria-labelledby="about-title">
-      <div class="container">
-        <div class="about-content fade-in-up">
-          <div class="about-text">
-            <h2 id="about-title">Our Story</h2>
-            <p>Sutra Kala was founded in 2026 in Jammu, with a vision to celebrate the beauty of handmade art and
-              timeless craftsmanship.</p>
-            <p>Founded by Simritee Bali, the brand reflects a passion for creativity and detail. With Yashnandanii as a
-              partner, the journey grew stronger and more purposeful.</p>
-            <p>Our creations come to life through the skilled hands of Working Partner Sunita Devi, whose dedication
-              adds soul to every piece. With the constant support of Miss Sonia, Sutra Kala continues to grow and
-              evolve.</p>
-            <p>From Jammu to everywhere — we weave stories into every thread.</p>
-            <div class="about-stats">
-              <div class="stat-item">
-                <span class="stat-number">500+</span>
-                <span class="stat-label">Happy Customers</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">25+</span>
-                <span class="stat-label">Artisans</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Handmade</span>
-              </div>
+                <!-- Mobile Menu -->
+                <div class="mobile-menu" id="mobileMenu">
+                    <ul class="mobile-nav-list">
+                        <li>
+                            <a href="shop.html" class="mobile-nav-link">Shop</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="mobile-nav-link">About</a>
+                        </li>
+                        <li>
+                            <a href="#gallery" class="mobile-nav-link"
+                                >Gallery</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#contact" class="mobile-nav-link"
+                                >Contact</a
+                            >
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          <div class="about-image">
-            <img src="assets/images/logo.jpg" alt="SutraKala Logo" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
+        </header>
 
-    <!-- Gallery Section — atmospheric lifestyle shots, no pricing or transactional elements -->
-    <section class="gallery-section" id="gallery" aria-labelledby="gallery-title">
-      <div class="container">
-        <div class="section-header fade-in-up">
-          <h2 id="gallery-title" class="section-title">The Studio</h2>
-          <p class="section-subtitle">Craft stories, told in thread</p>
-        </div>
-
-        <div class="gallery-grid fade-in-up delay-1">
-          <!-- Lifestyle image 1: Close-up of crochet stitch texture -->
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?w=600&h=600&fit=crop"
-              alt="Close-up texture of a delicate crochet stitch in warm cream yarn" loading="lazy">
-          </div>
-          <!-- Lifestyle image 2: Yarn and craft tools on wooden surface -->
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1558223689-8f8d1a9c6f5e?w=600&h=600&fit=crop"
-              alt="Soft pastel yarn balls arranged on a rustic wooden table" loading="lazy">
-          </div>
-          <!-- Lifestyle image 3: Artisan hands at work -->
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1612273279518-e7c5ad50d6f1?w=600&h=600&fit=crop"
-              alt="Artisan hands carefully crocheting with a fine hook" loading="lazy">
-          </div>
-          <!-- Lifestyle image 4: Finished piece draped -->
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop"
-              alt="Finished crochet baby accessories displayed on soft linen" loading="lazy">
-          </div>
-          <!-- Lifestyle image 5: Studio workspace -->
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=600&h=600&fit=crop"
-              alt="Sunlit craft studio with yarn and finished crochet pieces" loading="lazy">
-          </div>
-          <!-- Lifestyle image 6: Textural detail -->
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1579656381226-5fc703648680?w=600&h=600&fit=crop"
-              alt="Detail of a handwoven crochet blanket in soft pastel tones" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="contact-content fade-in-up">
-          <div class="contact-info">
-            <h2 id="contact-title">Get in Touch</h2>
-            <p class="contact-intro">Have a question or custom order request? We'd love to hear from you!</p>
-
-            <div class="contact-details">
-              <div class="contact-item">
-                <i class="fas fa-map-marker-alt contact-icon" aria-hidden="true"></i>
-                <div>
-                  <strong>Address</strong>
-                  <p>Jammu, Jammu &amp; Kashmir<br>India</p>
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Hero Section -->
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-content">
+                    <h1 id="hero-title" class="hero-title">
+                        Sutra kala loom of art loomed with heart.
+                    </h1>
+                    <p class="hero-subtitle">
+                        From the city of temples,
+                        <span lang="hi" class="devanagari"
+                            >सूत्र से कला तक</span
+                        >
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="shop.html" class="btn btn-primary"
+                            >Shop Collection</a
+                        >
+                        <a href="#about" class="btn btn-outline">Our Story</a>
+                    </div>
                 </div>
-              </div>
-
-              <div class="contact-item">
-                <i class="fas fa-phone contact-icon" aria-hidden="true"></i>
-                <div>
-                  <strong>Phone</strong>
-                  <p><a href="tel:+919103329604">+91 91033 29604</a></p>
+                <div class="hero-bouquet-wrapper">
+                    <img
+                        src="assets/images/bouquet.png"
+                        alt="Crochet Bouquet"
+                        class="hero-bouquet"
+                        id="heroBouquet"
+                        loading="eager"
+                    />
                 </div>
-              </div>
+            </section>
 
-              <div class="contact-item">
-                <i class="fas fa-envelope contact-icon" aria-hidden="true"></i>
-                <div>
-                  <strong>Email</strong>
-                  <p><a href="mailto:sutrakala@gmail.com">sutrakala@gmail.com</a></p>
+            <!-- Brand CTA Section (replaces product grid) -->
+            <section
+                class="brand-cta-section"
+                id="products"
+                aria-labelledby="cta-heading"
+            >
+                <!-- Decorative thread divider -->
+                <div class="thread-divider" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 900 40"
+                        preserveAspectRatio="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0,20 C150,5 300,35 450,20 C600,5 750,35 900,20"
+                            stroke="#8E44AD"
+                            stroke-width="1"
+                            fill="none"
+                            opacity="0.5"
+                        />
+                        <path
+                            d="M0,24 C150,9 300,39 450,24 C600,9 750,39 900,24"
+                            stroke="#D2B4DE"
+                            stroke-width="0.5"
+                            fill="none"
+                            opacity="0.3"
+                        />
+                    </svg>
                 </div>
-              </div>
 
-              <div class="contact-item">
-                <i class="fab fa-whatsapp contact-icon" aria-hidden="true"></i>
-                <div>
-                  <strong>WhatsApp</strong>
-                  <p><a href="https://wa.me/919103329604" target="_blank" rel="noopener">Chat with us</a></p>
+                <div class="container">
+                    <div class="brand-cta-inner fade-in-up">
+                        <p class="cta-eyebrow">Handwoven with intention</p>
+                        <h2 id="cta-heading" class="cta-heading">
+                            Discover our textile collection
+                        </h2>
+                        <p class="cta-description">
+                            Each piece is born from hours of careful craft —
+                            soft yarns, patient hands, and a love for the
+                            handmade. Browse our full collection and find
+                            something made just for you.
+                        </p>
+                        <a href="shop.html" class="btn btn-cta-shop">
+                            Shop Now <span class="cta-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
-              </div>
 
-              <div class="contact-item">
-                <i class="fas fa-clock contact-icon" aria-hidden="true"></i>
-                <div>
-                  <strong>Business Hours</strong>
-                  <p>By appointment only.</p>
+                <!-- Decorative thread divider (bottom) -->
+                <div
+                    class="thread-divider thread-divider--bottom"
+                    aria-hidden="true"
+                >
+                    <svg
+                        viewBox="0 0 900 40"
+                        preserveAspectRatio="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0,20 C150,35 300,5 450,20 C600,35 750,5 900,20"
+                            stroke="#8E44AD"
+                            stroke-width="1"
+                            fill="none"
+                            opacity="0.5"
+                        />
+                        <path
+                            d="M0,16 C150,31 300,1 450,16 C600,31 750,1 900,16"
+                            stroke="#D2B4DE"
+                            stroke-width="0.5"
+                            fill="none"
+                            opacity="0.3"
+                        />
+                    </svg>
                 </div>
-              </div>
+            </section>
+
+            <!-- About Section -->
+            <section
+                class="about-section"
+                id="about"
+                aria-labelledby="about-title"
+            >
+                <div class="container">
+                    <div class="about-content fade-in-up">
+                        <div class="about-text">
+                            <h2 id="about-title">Our Story</h2>
+                            <p>
+                                Sutra Kala was founded in 2026 in Jammu, with a
+                                vision to celebrate the beauty of handmade art
+                                and timeless craftsmanship.
+                            </p>
+                            <p>
+                                Founded by Simritee Bali, the brand reflects a
+                                passion for creativity and detail. With
+                                Yashnandanii as a partner, the journey grew
+                                stronger and more purposeful.
+                            </p>
+                            <p>
+                                Our creations come to life through the skilled
+                                hands of Working Partner Sunita Devi, whose
+                                dedication adds soul to every piece. With the
+                                constant support of Miss Sonia, Sutra Kala
+                                continues to grow and evolve.
+                            </p>
+                            <p>
+                                From Jammu to everywhere — we weave stories into
+                                every thread.
+                            </p>
+                            <div class="about-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">500+</span>
+                                    <span class="stat-label"
+                                        >Happy Customers</span
+                                    >
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">25+</span>
+                                    <span class="stat-label">Artisans</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">100%</span>
+                                    <span class="stat-label">Handmade</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-image">
+                            <img
+                                src="assets/images/logo.jpg"
+                                alt="SutraKala Logo"
+                                loading="lazy"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Section — atmospheric lifestyle shots, no pricing or transactional elements -->
+            <section
+                class="gallery-section"
+                id="gallery"
+                aria-labelledby="gallery-title"
+            >
+                <div class="container">
+                    <div class="section-header fade-in-up">
+                        <h2 id="gallery-title" class="section-title">
+                            The Studio
+                        </h2>
+                        <p class="section-subtitle">
+                            Craft stories, told in thread
+                        </p>
+                    </div>
+
+                    <div class="gallery-grid fade-in-up delay-1">
+                        <!-- Lifestyle image 1: Close-up of crochet stitch texture -->
+                        <div class="gallery-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1584362917165-526a968579e8?w=600&h=600&fit=crop"
+                                alt="Close-up texture of a delicate crochet stitch in warm cream yarn"
+                                loading="lazy"
+                            />
+                        </div>
+                        <!-- Lifestyle image 2: Yarn and craft tools on wooden surface -->
+                        <div class="gallery-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1558223689-8f8d1a9c6f5e?w=600&h=600&fit=crop"
+                                alt="Soft pastel yarn balls arranged on a rustic wooden table"
+                                loading="lazy"
+                            />
+                        </div>
+                        <!-- Lifestyle image 3: Artisan hands at work -->
+                        <div class="gallery-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1612273279518-e7c5ad50d6f1?w=600&h=600&fit=crop"
+                                alt="Artisan hands carefully crocheting with a fine hook"
+                                loading="lazy"
+                            />
+                        </div>
+                        <!-- Lifestyle image 4: Finished piece draped -->
+                        <div class="gallery-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop"
+                                alt="Finished crochet baby accessories displayed on soft linen"
+                                loading="lazy"
+                            />
+                        </div>
+                        <!-- Lifestyle image 5: Studio workspace -->
+                        <div class="gallery-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=600&h=600&fit=crop"
+                                alt="Sunlit craft studio with yarn and finished crochet pieces"
+                                loading="lazy"
+                            />
+                        </div>
+                        <!-- Lifestyle image 6: Textural detail -->
+                        <div class="gallery-item">
+                            <img
+                                src="https://images.unsplash.com/photo-1579656381226-5fc703648680?w=600&h=600&fit=crop"
+                                alt="Detail of a handwoven crochet blanket in soft pastel tones"
+                                loading="lazy"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section
+                class="contact-section"
+                id="contact"
+                aria-labelledby="contact-title"
+            >
+                <div class="container">
+                    <div class="contact-content fade-in-up">
+                        <div class="contact-info">
+                            <h2 id="contact-title">Get in Touch</h2>
+                            <p class="contact-intro">
+                                Have a question or custom order request? We'd
+                                love to hear from you!
+                            </p>
+
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <i
+                                        class="fas fa-map-marker-alt contact-icon"
+                                        aria-hidden="true"
+                                    ></i>
+                                    <div>
+                                        <strong>Address</strong>
+                                        <p>
+                                            Jammu, Jammu &amp; Kashmir<br />India
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-item">
+                                    <i
+                                        class="fas fa-phone contact-icon"
+                                        aria-hidden="true"
+                                    ></i>
+                                    <div>
+                                        <strong>Phone</strong>
+                                        <p>
+                                            <a href="tel:+919103329604"
+                                                >+91 91033 29604</a
+                                            >
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-item">
+                                    <i
+                                        class="fas fa-envelope contact-icon"
+                                        aria-hidden="true"
+                                    ></i>
+                                    <div>
+                                        <strong>Email</strong>
+                                        <p>
+                                            <a href="mailto:sutrakala@gmail.com"
+                                                >sutrakala@gmail.com</a
+                                            >
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-item">
+                                    <i
+                                        class="fab fa-whatsapp contact-icon"
+                                        aria-hidden="true"
+                                    ></i>
+                                    <div>
+                                        <strong>WhatsApp</strong>
+                                        <p>
+                                            <a
+                                                href="https://wa.me/919103329604"
+                                                target="_blank"
+                                                rel="noopener"
+                                                >Chat with us</a
+                                            >
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-item">
+                                    <i
+                                        class="fas fa-clock contact-icon"
+                                        aria-hidden="true"
+                                    ></i>
+                                    <div>
+                                        <strong>Business Hours</strong>
+                                        <p>By appointment only.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="social-links">
+                                <a
+                                    href="https://www.instagram.com/sutrakala._?igsh=MjBrMWRlbHFqczl4"
+                                    class="social-link"
+                                    aria-label="Follow us on Instagram"
+                                    ><i class="fab fa-instagram"></i
+                                ></a>
+                                <a
+                                    href="https://pin.it/70KzShSzz"
+                                    class="social-link"
+                                    aria-label="Follow us on Pinterest"
+                                    ><i class="fab fa-pinterest"></i
+                                ></a>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-wrapper">
+                            <form
+                                class="contact-form"
+                                id="contactForm"
+                                novalidate
+                            >
+                                <div class="form-group">
+                                    <label for="name"
+                                        >Name
+                                        <span class="required">*</span></label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        required
+                                        aria-required="true"
+                                        placeholder="Your name"
+                                        autocomplete="name"
+                                    />
+                                    <span
+                                        class="error-message"
+                                        id="nameError"
+                                    ></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email"
+                                        >Email
+                                        <span class="required">*</span></label
+                                    >
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                        aria-required="true"
+                                        placeholder="your@email.com"
+                                        autocomplete="email"
+                                    />
+                                    <span
+                                        class="error-message"
+                                        id="emailError"
+                                    ></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        placeholder="+91 XXXXX XXXXX"
+                                        pattern="[0-9+\-\s()]+"
+                                        autocomplete="tel"
+                                    />
+                                    <span
+                                        class="error-message"
+                                        id="phoneError"
+                                    ></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="subject"
+                                        >Subject
+                                        <span class="required">*</span></label
+                                    >
+                                    <select
+                                        id="subject"
+                                        name="subject"
+                                        required
+                                        aria-required="true"
+                                    >
+                                        <option value="">
+                                            Select a subject
+                                        </option>
+                                        <option value="general">
+                                            General Inquiry
+                                        </option>
+                                        <option value="custom">
+                                            Custom Order
+                                        </option>
+                                        <option value="wholesale">
+                                            Wholesale
+                                        </option>
+                                        <option value="support">
+                                            Customer Support
+                                        </option>
+                                    </select>
+                                    <span
+                                        class="error-message"
+                                        id="subjectError"
+                                    ></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message"
+                                        >Message
+                                        <span class="required">*</span></label
+                                    >
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        required
+                                        aria-required="true"
+                                        placeholder="Your message..."
+                                        rows="5"
+                                    ></textarea>
+                                    <span
+                                        class="error-message"
+                                        id="messageError"
+                                    ></span>
+                                </div>
+
+                                <button type="submit" class="btn btn-submit">
+                                    <i
+                                        class="fas fa-paper-plane"
+                                        aria-hidden="true"
+                                    ></i>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-compact">
+                    <div class="footer-brand">
+                        <a href="#top" class="footer-logo group">
+                            <img
+                                src="assets/images/logo.jpg"
+                                alt="SutraKala Logo"
+                                class="footer-site-logo spin-on-hover"
+                            />
+                            <span>SutraKala</span>
+                        </a>
+                    </div>
+
+                    <nav class="footer-nav">
+                        <a href="shop.html" class="footer-link">Shop</a>
+                        <a href="#about" class="footer-link">Our Story</a>
+                        <a href="#gallery" class="footer-link">Gallery</a>
+                        <a href="#contact" class="footer-link">Contact</a>
+                    </nav>
+
+                    <div class="footer-social-compact">
+                        <a
+                            href="https://www.instagram.com/sutrakala._?igsh=MjBrMWRlbHFqczl4"
+                            class="social-icon float-hover"
+                            aria-label="Instagram"
+                        >
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a
+                            href="https://pin.it/70KzShSzz"
+                            class="social-icon float-hover"
+                            aria-label="Pinterest"
+                        >
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom-compact">
+                    <p>&copy; 2026 SutraKala.</p>
+                    <p class="footer-made-with">Made with 🧶 in Jammu, India</p>
+                </div>
             </div>
+        </footer>
 
-            <div class="social-links">
-              <a href="https://www.instagram.com/sutrakala._?igsh=MjBrMWRlbHFqczl4" class="social-link"
-                aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="https://pin.it/70KzShSzz" class="social-link" aria-label="Follow us on Pinterest"><i
-                  class="fab fa-pinterest"></i></a>
+        <!-- Cart Modal -->
+        <div
+            class="modal"
+            id="cartModal"
+            role="dialog"
+            aria-labelledby="cartModalTitle"
+            aria-modal="true"
+            hidden
+        >
+            <div class="modal-overlay" id="cartModalOverlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="cartModalTitle">Your Shopping Cart</h2>
+                    <button
+                        class="modal-close"
+                        id="cartModalClose"
+                        aria-label="Close cart"
+                    >
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be inserted here -->
+                    </div>
+                    <div class="cart-empty" id="cartEmpty">
+                        <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                        <p>Your cart is empty</p>
+                        <a href="shop.html" class="btn btn-primary"
+                            >Browse Products</a
+                        >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span id="cartTotal">₹0</span>
+                    </div>
+                    <button
+                        class="btn btn-primary btn-checkout"
+                        id="checkoutBtn"
+                    >
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        Checkout via WhatsApp
+                    </button>
+                </div>
             </div>
-          </div>
-
-          <div class="contact-form-wrapper">
-            <form class="contact-form" id="contactForm" novalidate>
-              <div class="form-group">
-                <label for="name">Name <span class="required">*</span></label>
-                <input type="text" id="name" name="name" required aria-required="true" placeholder="Your name" autocomplete="name">
-                <span class="error-message" id="nameError"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email <span class="required">*</span></label>
-                <input type="email" id="email" name="email" required aria-required="true" placeholder="your@email.com" autocomplete="email">
-                <span class="error-message" id="emailError"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" pattern="[0-9+\-\s()]+" autocomplete="tel">
-                <span class="error-message" id="phoneError"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="subject">Subject <span class="required">*</span></label>
-                <select id="subject" name="subject" required aria-required="true">
-                  <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="custom">Custom Order</option>
-                  <option value="wholesale">Wholesale</option>
-                  <option value="support">Customer Support</option>
-                </select>
-                <span class="error-message" id="subjectError"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="message">Message <span class="required">*</span></label>
-                <textarea id="message" name="message" required aria-required="true" placeholder="Your message..."
-                  rows="5"></textarea>
-                <span class="error-message" id="messageError"></span>
-              </div>
-
-              <button type="submit" class="btn btn-submit">
-                <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-compact">
-        <div class="footer-brand">
-          <a href="#top" class="footer-logo group">
-            <img src="assets/images/logo.jpg" alt="SutraKala Logo" class="footer-site-logo spin-on-hover">
-            <span>SutraKala</span>
-          </a>
         </div>
 
-        <nav class="footer-nav">
-          <a href="shop.html" class="footer-link">Shop</a>
-          <a href="#about" class="footer-link">Our Story</a>
-          <a href="#gallery" class="footer-link">Gallery</a>
-          <a href="#contact" class="footer-link">Contact</a>
-        </nav>
-
-        <div class="footer-social-compact">
-          <a href="https://www.instagram.com/sutrakala._?igsh=MjBrMWRlbHFqczl4" class="social-icon float-hover" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="social-icon float-hover" aria-label="Facebook">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="https://pin.it/70KzShSzz" class="social-icon float-hover" aria-label="Pinterest">
-            <i class="fab fa-pinterest"></i>
-          </a>
-          <a href="https://wa.me/919103329604" class="social-icon float-hover" aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-          </a>
+        <!-- Toast Notification -->
+        <div class="toast" id="toast" role="alert" aria-live="assertive" hidden>
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span class="toast-message" id="toastMessage"></span>
         </div>
-      </div>
 
-      <div class="footer-bottom-compact">
-        <p>&copy; 2026 SutraKala.</p>
-        <p class="footer-made-with">Made with 🧶 in Jammu, India</p>
-      </div>
-    </div>
-  </footer>
+        <!-- JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
-  <!-- Cart Modal -->
-  <div class="modal" id="cartModal" role="dialog" aria-labelledby="cartModalTitle" aria-modal="true" hidden>
-    <div class="modal-overlay" id="cartModalOverlay"></div>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="cartModalTitle">Your Shopping Cart</h2>
-        <button class="modal-close" id="cartModalClose" aria-label="Close cart">
-          <i class="fas fa-times" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="cart-items" id="cartItems">
-          <!-- Cart items will be inserted here -->
-        </div>
-        <div class="cart-empty" id="cartEmpty">
-          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
-          <p>Your cart is empty</p>
-          <a href="shop.html" class="btn btn-primary">Browse Products</a>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="cart-total">
-          <span>Total:</span>
-          <span id="cartTotal">₹0</span>
-        </div>
-        <button class="btn btn-primary btn-checkout" id="checkoutBtn">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i> Checkout via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
+        <!-- Firebase Configuration -->
+        <script src="js/firebase-config.js"></script>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast" role="alert" aria-live="assertive" hidden>
-    <i class="fas fa-check-circle" aria-hidden="true"></i>
-    <span class="toast-message" id="toastMessage"></span>
-  </div>
+        <!-- Firebase Initialization -->
+        <script type="module" src="js/firebase-init.js"></script>
 
-  <!-- JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <script type="module" src="js/main.js"></script>
-</body>
+        <!-- Authentication System -->
+        <script type="module" src="js/auth-init.js"></script>
 
+        <script type="module" src="js/main.js"></script>
+    </body>
 </html>

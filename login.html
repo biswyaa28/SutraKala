@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
+        />
+        <meta
+            name="description"
+            content="Sign in to SutraKala to save your cart and track orders"
+        />
+        <title>Login | SutraKala</title>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Caveat:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="css/main.css" />
+
+        <style>
+            /* Login Page Specific Styles */
+            .login-page {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-peach) 50%, var(--color-lavender) 100%);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .login-page::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--texture-woven);
+                opacity: 0.3;
+                pointer-events: none;
+            }
+
+            .login-header {
+                padding: 2rem;
+                position: relative;
+                z-index: 10;
+            }
+
+            .login-header .logo {
+                display: inline-block;
+            }
+
+            .login-header .logo img {
+                height: 50px;
+                width: auto;
+            }
+
+            .login-container {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+                position: relative;
+                z-index: 10;
+            }
+
+            .login-card {
+                background: var(--color-white);
+                border-radius: var(--radius-xl);
+                box-shadow: var(--shadow-xl);
+                padding: 3rem;
+                max-width: 480px;
+                width: 100%;
+                text-align: center;
+                position: relative;
+                border: 1px solid rgba(142, 68, 173, 0.1);
+            }
+
+            @media (max-width: 768px) {
+                .login-card {
+                    padding: 2rem;
+                }
+            }
+
+            .login-card::before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                background: var(--gradient-premium);
+                border-radius: var(--radius-xl);
+                opacity: 0.1;
+                z-index: -1;
+            }
+
+            .login-title {
+                font-family: var(--font-heading);
+                font-size: var(--font-size-h2);
+                color: var(--color-sage);
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+
+            .login-subtitle {
+                font-size: var(--font-size-base);
+                color: var(--color-text-secondary);
+                margin-bottom: 2.5rem;
+            }
+
+            .login-divider {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                margin: 1.5rem 0;
+                color: var(--color-text-tertiary);
+                font-size: var(--font-size-sm);
+            }
+
+            .login-divider::before,
+            .login-divider::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid var(--color-divider);
+            }
+
+            .login-divider span {
+                padding: 0 1rem;
+            }
+
+            .google-login-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.75rem;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                background: var(--color-white);
+                color: var(--color-text-primary);
+                border: 2px solid var(--color-mint);
+                border-radius: var(--radius-lg);
+                font-size: var(--font-size-base);
+                font-weight: 600;
+                cursor: pointer;
+                transition: all var(--transition-normal);
+                font-family: var(--font-primary);
+            }
+
+            .google-login-btn:hover {
+                background: var(--color-mint);
+                color: var(--color-white);
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-glow);
+            }
+
+            .google-login-btn:active {
+                transform: translateY(0);
+            }
+
+            .google-login-btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .google-login-btn i {
+                font-size: 1.25rem;
+            }
+
+            .login-guest {
+                margin-top: 2rem;
+                padding-top: 2rem;
+                border-top: 1px solid var(--color-divider);
+            }
+
+            .login-guest p {
+                color: var(--color-text-secondary);
+                font-size: var(--font-size-base);
+            }
+
+            .login-guest a {
+                color: var(--color-mint);
+                text-decoration: none;
+                font-weight: 600;
+                transition: color var(--transition-normal);
+            }
+
+            .login-guest a:hover {
+                color: var(--color-sage);
+                text-decoration: underline;
+            }
+
+            .login-loading {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 2rem 0;
+            }
+
+            .spinner {
+                width: 48px;
+                height: 48px;
+                border: 4px solid var(--color-lavender);
+                border-top-color: var(--color-mint);
+                border-radius: 50%;
+                animation: spin 0.8s linear infinite;
+            }
+
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+
+            .login-loading p {
+                color: var(--color-text-secondary);
+                font-size: var(--font-size-base);
+            }
+
+            .error-message {
+                background: rgba(229, 163, 163, 0.1);
+                border: 1px solid var(--color-error);
+                color: #b33;
+                padding: 1rem;
+                border-radius: var(--radius-md);
+                margin-bottom: 1.5rem;
+                font-size: var(--font-size-sm);
+                display: none;
+            }
+
+            .error-message.show {
+                display: block;
+            }
+
+            .login-footer {
+                padding: 2rem;
+                text-align: center;
+                color: var(--color-text-tertiary);
+                font-size: var(--font-size-sm);
+                position: relative;
+                z-index: 10;
+            }
+
+            /* Decorative elements */
+            .decoration {
+                position: absolute;
+                opacity: 0.1;
+                pointer-events: none;
+            }
+
+            .decoration-1 {
+                top: 10%;
+                left: 5%;
+                width: 100px;
+                height: 100px;
+                background: radial-gradient(circle, var(--color-mint) 0%, transparent 70%);
+                border-radius: 50%;
+            }
+
+            .decoration-2 {
+                bottom: 15%;
+                right: 8%;
+                width: 150px;
+                height: 150px;
+                background: radial-gradient(circle, var(--color-lavender) 0%, transparent 70%);
+                border-radius: 50%;
+            }
+
+            .decoration-3 {
+                top: 50%;
+                right: 3%;
+                width: 80px;
+                height: 80px;
+                background: radial-gradient(circle, var(--color-sage) 0%, transparent 70%);
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+
+    <body class="login-page">
+        <!-- Decorative elements -->
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+        <div class="decoration decoration-3"></div>
+
+        <!-- Header with Logo -->
+        <header class="login-header">
+            <div class="logo">
+                <a href="index.html" aria-label="Back to SutraKala Home">
+                    <img
+                        src="assets/images/logo.jpg?v=2"
+                        alt="SutraKala Logo"
+                        class="site-logo"
+                    />
+                </a>
+            </div>
+        </header>
+
+        <!-- Login Container -->
+        <main class="login-container">
+            <div class="login-card">
+                <div id="loginContent">
+                    <h1 class="login-title">Welcome to SutraKala</h1>
+                    <p class="login-subtitle">Sign in to save your cart and track orders</p>
+
+                    <div id="errorMessage" class="error-message" role="alert"></div>
+
+                    <button class="google-login-btn" id="googleLoginBtn">
+                        <i class="fab fa-google"></i>
+                        <span>Continue with Google</span>
+                    </button>
+
+                    <div class="login-guest">
+                        <p>Just browsing? <a href="index.html">Continue as guest</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="login-footer">
+            <p>&copy; 2024 SutraKala. Handcrafted with <i class="fas fa-heart" style="color: var(--color-mint);"></i> in Jammu</p>
+        </footer>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast" hidden>
+            <p id="toastMessage"></p>
+        </div>
+
+        <!-- Firebase Config & Init (Required for Auth) -->
+        <script src="js/firebase-config.js"></script>
+        <script type="module" src="js/firebase-init.js"></script>
+        
+        <!-- Login Page Script -->
+        <script type="module" src="js/features/auth/login-page.js"></script>
+    </body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In Diagnostic Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #764ba2;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .status-card.error {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        .status-card.success {
+            border-left-color: #28a745;
+            background: #f0fff4;
+        }
+        
+        .status-card.warning {
+            border-left-color: #ffc107;
+            background: #fffef5;
+        }
+        
+        .status-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-card pre {
+            background: #2d3748;
+            color: #48bb78;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .status-card code {
+            background: #e2e8f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: #5e3886;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .checklist {
+            list-style: none;
+        }
+        
+        .checklist li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .icon {
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+        
+        .icon.check { color: #28a745; }
+        .icon.cross { color: #dc3545; }
+        .icon.info { color: #667eea; }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #764ba2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .step strong {
+            color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Google Sign-In Diagnostic Tool</h1>
+            <p>Let's figure out what's wrong with your Google authentication</p>
+        </div>
+        
+        <div class="content" id="diagnosticResults">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Running diagnostics...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        
+        const results = [];
+        
+        // Helper to add results
+        function addResult(title, status, message, details = null) {
+            results.push({ title, status, message, details });
+        }
+        
+        // Render results
+        function renderResults() {
+            const container = document.getElementById('diagnosticResults');
+            
+            let html = '<h2 style="margin-bottom: 1.5rem;">Diagnostic Results</h2>';
+            
+            results.forEach(result => {
+                const statusClass = result.status === 'success' ? 'success' : 
+                                   result.status === 'error' ? 'error' : 'warning';
+                const icon = result.status === 'success' ? '✅' : 
+                            result.status === 'error' ? '❌' : '⚠️';
+                
+                html += `
+                    <div class="status-card ${statusClass}">
+                        <h3>${icon} ${result.title}</h3>
+                        <p>${result.message}</p>
+                        ${result.details ? `<pre>${result.details}</pre>` : ''}
+                    </div>
+                `;
+            });
+            
+            // Add solution section
+            const hasErrors = results.some(r => r.status === 'error');
+            if (hasErrors) {
+                html += generateSolutions();
+            }
+            
+            // Add test button
+            html += `
+                <button class="btn" id="testSignInBtn">
+                    🧪 Test Google Sign-In Now
+                </button>
+            `;
+            
+            container.innerHTML = html;
+            
+            // Bind test button
+            document.getElementById('testSignInBtn')?.addEventListener('click', testGoogleSignIn);
+        }
+        
+        // Generate solutions based on errors
+        function generateSolutions() {
+            return `
+                <div class="status-card warning">
+                    <h3>📋 How to Fix</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="icon info">1️⃣</span>
+                            <div>
+                                <strong>Enable Google Sign-In in Firebase Console:</strong>
+                                <div class="step">
+                                    • Go to <a href="https://console.firebase.google.com/project/sutrakala-aa44b/authentication/providers" target="_blank">Firebase Console → Authentication → Sign-in method</a><br>
+                                    • Click on "Google"<br>
+                                    • Toggle "Enable"<br>
+                                    • Add your project support email<br>
+                                    • Click "Save"
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon info">2️⃣</span>
+                            <div>
+                                <strong>Add Authorized Domains:</strong>
+                                <div class="step">
+                                    • In the same Firebase Console, go to Authentication → Settings<br>
+                                    • Under "Authorized domains", ensure these are listed:<br>
+                                    • <code>localhost</code><br>
+                                    • <code>${window.location.hostname}</code><br>
+                                    • Your production domain (e.g., sutrakala.com)
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon info">3️⃣</span>
+                            <div>
+                                <strong>Check OAuth Configuration:</strong>
+                                <div class="step">
+                                    • Go to <a href="https://console.cloud.google.com/apis/credentials?project=sutrakala-aa44b" target="_blank">Google Cloud Console → Credentials</a><br>
+                                    • Find your OAuth 2.0 Client ID<br>
+                                    • Under "Authorized JavaScript origins", add:<br>
+                                    • <code>http://localhost:8080</code><br>
+                                    • <code>http://127.0.0.1:8080</code><br>
+                                    • Your production URL<br>
+                                    • Under "Authorized redirect URIs", add:<br>
+                                    • <code>http://localhost:8080/__/auth/handler</code><br>
+                                    • <code>https://sutrakala-aa44b.firebaseapp.com/__/auth/handler</code>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon info">4️⃣</span>
+                            <div>
+                                <strong>Verify Firebase Configuration:</strong>
+                                <div class="step">
+                                    • Check that <code>js/firebase-config.js</code> has correct credentials<br>
+                                    • Ensure API Key is valid<br>
+                                    • Confirm Auth Domain matches your project
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            `;
+        }
+        
+        // Test Google Sign-In
+        async function testGoogleSignIn() {
+            const btn = document.getElementById('testSignInBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Testing...';
+            
+            try {
+                const auth = getAuth();
+                const provider = new GoogleAuthProvider();
+                provider.addScope('profile');
+                provider.addScope('email');
+                provider.setCustomParameters({
+                    prompt: 'select_account'
+                });
+                
+                console.log('Attempting Google sign-in...');
+                const result = await signInWithPopup(auth, provider);
+                
+                alert('✅ Success! Google Sign-In is working!\n\nUser: ' + result.user.email);
+                btn.textContent = '✅ Sign-In Successful!';
+                btn.style.background = '#28a745';
+                
+            } catch (error) {
+                console.error('Sign-in test failed:', error);
+                alert('❌ Sign-In Failed\n\nError: ' + error.message + '\n\nCode: ' + error.code + '\n\nCheck the diagnostic results above for solutions.');
+                btn.disabled = false;
+                btn.textContent = '🧪 Try Again';
+            }
+        }
+        
+        // Run diagnostics
+        async function runDiagnostics() {
+            try {
+                // Test 1: Check Firebase config
+                if (window.ENV && window.ENV.FIREBASE_API_KEY) {
+                    addResult(
+                        'Firebase Configuration',
+                        'success',
+                        'Firebase credentials are loaded correctly.',
+                        `API Key: ${window.ENV.FIREBASE_API_KEY.substring(0, 20)}...\nProject ID: ${window.ENV.FIREBASE_PROJECT_ID}\nAuth Domain: ${window.ENV.FIREBASE_AUTH_DOMAIN}`
+                    );
+                } else {
+                    addResult(
+                        'Firebase Configuration',
+                        'error',
+                        'Firebase credentials are missing or not loaded properly.',
+                        'window.ENV is not defined'
+                    );
+                }
+                
+                // Test 2: Initialize Firebase
+                try {
+                    const firebaseConfig = {
+                        apiKey: window.ENV.FIREBASE_API_KEY,
+                        authDomain: window.ENV.FIREBASE_AUTH_DOMAIN,
+                        projectId: window.ENV.FIREBASE_PROJECT_ID,
+                        storageBucket: window.ENV.FIREBASE_STORAGE_BUCKET,
+                        messagingSenderId: window.ENV.FIREBASE_MESSAGING_SENDER_ID,
+                        appId: window.ENV.FIREBASE_APP_ID,
+                        measurementId: window.ENV.FIREBASE_MEASUREMENT_ID
+                    };
+                    
+                    const app = initializeApp(firebaseConfig);
+                    const auth = getAuth(app);
+                    
+                    addResult(
+                        'Firebase Initialization',
+                        'success',
+                        'Firebase SDK initialized successfully.',
+                        `App Name: ${app.name}\nAuth Domain: ${auth.config.authDomain}`
+                    );
+                } catch (error) {
+                    addResult(
+                        'Firebase Initialization',
+                        'error',
+                        'Failed to initialize Firebase SDK.',
+                        error.message
+                    );
+                }
+                
+                // Test 3: Check current domain
+                const currentDomain = window.location.hostname;
+                const port = window.location.port;
+                const protocol = window.location.protocol;
+                
+                addResult(
+                    'Current Domain',
+                    'info',
+                    `You are accessing this page from: ${currentDomain}${port ? ':' + port : ''}`,
+                    `Protocol: ${protocol}\nFull URL: ${window.location.href}\n\nMake sure this domain is added to Firebase authorized domains.`
+                );
+                
+                // Test 4: Check Google Auth Provider
+                try {
+                    const provider = new GoogleAuthProvider();
+                    provider.addScope('profile');
+                    provider.addScope('email');
+                    
+                    addResult(
+                        'Google Auth Provider',
+                        'success',
+                        'GoogleAuthProvider initialized successfully.',
+                        `Provider ID: ${provider.providerId}\nScopes: profile, email`
+                    );
+                } catch (error) {
+                    addResult(
+                        'Google Auth Provider',
+                        'error',
+                        'Failed to initialize Google Auth Provider.',
+                        error.message
+                    );
+                }
+                
+                // Test 5: Browser compatibility
+                const isPopupSupported = window.open !== undefined;
+                const isLocalhost = currentDomain === 'localhost' || currentDomain === '127.0.0.1';
+                
+                addResult(
+                    'Browser Compatibility',
+                    isPopupSupported ? 'success' : 'error',
+                    isPopupSupported ? 
+                        'Browser supports popup authentication.' : 
+                        'Browser does not support popup authentication (this is rare).',
+                    `Popup support: ${isPopupSupported}\nLocalhost: ${isLocalhost}\nUser Agent: ${navigator.userAgent.substring(0, 80)}...`
+                );
+                
+                // Test 6: Check for redirect result
+                try {
+                    const auth = getAuth();
+                    const result = await getRedirectResult(auth);
+                    if (result) {
+                        addResult(
+                            'Redirect Result',
+                            'success',
+                            'User was redirected back after authentication.',
+                            `User: ${result.user.email}\nProvider: ${result.providerId}`
+                        );
+                    } else {
+                        addResult(
+                            'Redirect Result',
+                            'info',
+                            'No pending redirect authentication.',
+                            'This is normal if you haven\'t tried signing in yet.'
+                        );
+                    }
+                } catch (error) {
+                    addResult(
+                        'Redirect Result',
+                        'warning',
+                        'Could not check redirect result.',
+                        error.message
+                    );
+                }
+                
+                renderResults();
+                
+            } catch (error) {
+                console.error('Diagnostic error:', error);
+                document.getElementById('diagnosticResults').innerHTML = `
+                    <div class="status-card error">
+                        <h3>❌ Diagnostic Failed</h3>
+                        <p>${error.message}</p>
+                        <pre>${error.stack}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        // Run diagnostics when page loads
+        runDiagnostics();
+    </script>
+</body>
+</html>

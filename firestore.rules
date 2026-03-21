@@ -1,0 +1,80 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isValidUserData() {
+      return request.resource.data.keys().hasOnly([
+        'uid', 'email', 'phoneNumber', 'displayName', 'photoURL', 'provider',
+        'cart', 'addresses', 'orders', 'preferences', 'metadata'
+      ]);
+    }
+    
+    // Users collection - users can only access their own data
+    match /users/{userId} {
+      // Allow read and write only for the authenticated user
+      allow read: if isOwner(userId);
+      
+      // Allow user to create their own document on first login
+      allow create: if isAuthenticated() 
+        && request.auth.uid == userId
+        && isValidUserData();
+      
+      // Allow user to update their own document
+      allow update: if isOwner(userId) && isValidUserData();
+      
+      // Prevent deletion of user documents (data retention policy)
+      allow delete: if false;
+    }
+    
+    // Products collection - public read access for browsing
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if false; // Only admins can write (use Firebase Admin SDK)
+    }
+    
+    // Orders collection - users can only see their own orders
+    match /orders/{orderId} {
+      allow read: if isAuthenticated() 
+        && request.auth.uid == resource.data.userId;
+      
+      allow create: if isAuthenticated() 
+        && request.auth.uid == request.resource.data.userId
+        && request.resource.data.keys().hasAll(['userId', 'products', 'total', 'status'])
+        && request.resource.data.status == 'pending';
+      
+      // Only allow status updates, not full document rewrites
+      allow update: if isAuthenticated() 
+        && request.auth.uid == resource.data.userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+      
+      allow delete: if false; // Orders cannot be deleted
+    }
+    
+    // Categories collection - public read for filtering
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if false; // Admin only
+    }
+    
+    // Site configuration - public read
+    match /config/{configDoc} {
+      allow read: if true;
+      allow write: if false; // Admin only
+    }
+    
+    // Deny all other paths by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

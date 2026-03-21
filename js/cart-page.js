@@ -1,6 +1,9 @@
 // js/cart-page.js
+// Cart page functionality with performance tracking
+
 import { storage } from './utils/storage.js';
 import { showToast } from './utils/toast.js';
+import { initPageTraces } from './performance-traces.js';
 
 class CartPage {
     constructor() {
@@ -186,5 +189,9 @@ class CartPage {
 
 // Initialize cart page
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Firebase Performance Monitoring
+    initPageTraces();
+    
+    // Initialize cart page
     new CartPage();
 });
