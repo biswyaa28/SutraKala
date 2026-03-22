@@ -1,0 +1,104 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen",
+          "include",
+          "mixin",
+          "extend"
+        ]
+      }
+    ],
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": [
+      "always",
+      {
+        "ignore": ["stylelint-commands", "inside-block"]
+      }
+    ],
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "function-comma-space-after": "always",
+    "function-parentheses-space-inside": "never",
+    "indentation": 2,
+    "max-empty-lines": 1,
+    "no-duplicate-selectors": true,
+    "no-eol-whitespace": true,
+    "no-missing-end-of-source-newline": true,
+    "number-leading-zero": "always",
+    "number-no-trailing-zeros": true,
+    "property-no-unknown": true,
+    "property-no-vendor-prefix": null,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "ignore": ["after-comment", "inside-block"]
+      }
+    ],
+    "selector-class-pattern": [
+      "^[a-z][a-zA-Z0-9_-]+(__[a-z][a-zA-Z0-9_-]+)?(--[a-z][a-zA-Z0-9_-]+)?$",
+      {
+        "message": "Expected class selector to follow BEM naming convention"
+      }
+    ],
+    "selector-no-vendor-prefix": null,
+    "shorthand-property-no-redundant-values": true,
+    "string-quotes": "single",
+    "unit-no-unknown": true,
+    "value-no-vendor-prefix": null,
+    "length-zero-no-unit": true,
+    "color-hex-length": "short",
+    "color-hex-case": "lower",
+    "font-weight-notation": "numeric",
+    "function-url-quotes": "always",
+    "media-feature-range-notation": "context",
+    "selector-attribute-quotes": "always",
+    "selector-pseudo-element-colon-notation": "double",
+    "selector-pseudo-class-parentheses-space-inside": "never",
+    "declaration-block-no-duplicate-properties": [
+      true,
+      {
+        "ignore": ["consecutive-duplicates-with-different-values"]
+      }
+    ],
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-block-single-line-max-declarations": 1,
+    "comment-whitespace-inside": "always",
+    "custom-property-empty-line-before": [
+      "always",
+      {
+        "except": ["after-custom-property", "first-nested"],
+        "ignore": ["after-comment", "inside-single-line-block"]
+      }
+    ],
+    "declaration-empty-line-before": [
+      "always",
+      {
+        "except": ["after-declaration", "first-nested"],
+        "ignore": ["after-comment", "inside-single-line-block"]
+      }
+    ]
+  },
+  "ignoreFiles": [
+    "public/**/*",
+    "dist/**/*",
+    "build/**/*",
+    "node_modules/**/*",
+    "*.min.css",
+    "vendor/**/*"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.css"],
+      "customSyntax": "postcss"
+    }
+  ]
+}

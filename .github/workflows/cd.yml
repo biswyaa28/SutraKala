@@ -1,0 +1,103 @@
+# Continuous Deployment Pipeline for SutraKala
+# .github/workflows/cd.yml
+
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.inputs.environment == 'staging'
+    environment:
+      name: staging
+      url: https://sutrakala-staging.web.app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production assets
+        run: npm run build
+        env:
+          NODE_ENV: staging
+
+      - name: Deploy to Firebase (Staging)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAGING }}'
+          channelId: live
+          projectId: sutrakala-staging
+
+      - name: Notify deployment
+        if: success()
+        run: |
+          echo "✅ Staging deployment successful!"
+          echo "URL: https://sutrakala-staging.web.app"
+
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'production'
+    environment:
+      name: production
+      url: https://sutrakala.web.app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Security audit
+        run: npm audit --audit-level=high
+
+      - name: Build production assets
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Firebase (Production)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCTION }}'
+          channelId: live
+          projectId: sutrakala-aa44b
+
+      - name: Notify deployment
+        if: success()
+        run: |
+          echo "✅ Production deployment successful!"
+          echo "URL: https://sutrakala.web.app"

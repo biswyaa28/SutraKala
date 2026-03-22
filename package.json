@@ -1,0 +1,79 @@
+{
+  "name": "sutrakala",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Firebase-based e-commerce platform for handcrafted products",
+  "type": "module",
+  "scripts": {
+    "dev": "npm-run-all --parallel watch:css watch:js serve",
+    "build": "npm-run-all build:css build:js build:optimize",
+    "build:css": "postcss src/styles/main.css -o public/css/main.css",
+    "build:js": "rollup -c config/rollup.config.js",
+    "build:optimize": "npm-run-all optimize:images minify:css minify:js",
+    "optimize:images": "node scripts/build/optimize-images.js",
+    "minify:css": "cleancss -o public/css/main.min.css public/css/main.css",
+    "minify:js": "terser public/js/main.js -o public/js/main.min.js -c -m",
+    "serve": "firebase emulators:start --only hosting,firestore,auth",
+    "deploy:staging": "node scripts/deploy/staging.js",
+    "deploy:production": "node scripts/deploy/production.js",
+    "test": "npm-run-all test:unit test:integration",
+    "test:unit": "vitest run tests/unit/",
+    "test:integration": "vitest run tests/integration/",
+    "test:e2e": "playwright test tests/e2e/",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix",
+    "lint:css": "stylelint src/styles/",
+    "lint:css:fix": "stylelint src/styles/ --fix",
+    "security:check": "npm audit && snyk test",
+    "watch:css": "postcss src/styles/main.css -o public/css/main.css --watch",
+    "watch:js": "rollup -c config/rollup.config.js --watch",
+    "clean": "rimraf public/css public/js .firebase",
+    "predeploy": "npm run build"
+  },
+  "keywords": [
+    "ecommerce",
+    "firebase",
+    "handcrafted",
+    "crochet"
+  ],
+  "author": "SutraKala Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitest/coverage-v8": "^1.0.4",
+    "autoprefixer": "^10.4.16",
+    "clean-css-cli": "^5.6.3",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "firebase-tools": "^13.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "postcss-preset-env": "^9.3.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.1",
+    "sharp": "^0.33.1",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard": "^36.0.0",
+    "terser": "^5.26.0",
+    "vitest": "^1.0.4"
+  },
+  "dependencies": {
+    "firebase": "^10.8.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,159 @@
+/**
+ * Input Component Styles
+ * BEM: .input, .input-group, .input__label, .input__error
+ */
+
+/* Input Group Wrapper */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Label */
+.input__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* Base Input */
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+}
+
+.input:disabled {
+  background-color: var(--color-bg-tertiary);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.input[readonly] {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Error State */
+.input-group--error .input {
+  border-color: var(--color-error);
+}
+
+.input-group--error .input:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Error Message */
+.input__error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.input__error::before {
+  content: '⚠';
+  font-size: 0.9em;
+}
+
+/* Success State */
+.input-group--success .input {
+  border-color: var(--color-success);
+}
+
+.input-group--success .input:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Input Sizes */
+.input--sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.input--lg {
+  padding: var(--spacing-4) var(--spacing-5);
+  font-size: var(--font-size-lg);
+}
+
+/* Textarea */
+textarea.input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Input with Icon */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper .input {
+  padding-left: var(--spacing-10);
+}
+
+.input-wrapper .input__icon {
+  position: absolute;
+  left: var(--spacing-3);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+/* Input Group (Multiple Inputs) */
+.input-group--inline {
+  flex-direction: row;
+  align-items: center;
+}
+
+.input-group--inline .input__label {
+  margin-bottom: 0;
+}
+
+/* Helper Text */
+.input__help {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+/* Character Counter */
+.input__counter {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  text-align: right;
+}
+
+/* Password Toggle */
+.input__toggle {
+  position: absolute;
+  right: var(--spacing-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-tertiary);
+  padding: var(--spacing-1);
+}
+
+.input__toggle:hover {
+  color: var(--color-text-secondary);
+}
