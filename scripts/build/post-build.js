@@ -92,23 +92,26 @@ for (const file of configFiles) {
 
 // 3. Copy features directory structure
 const featuresDestDir = resolve(rootJsDir, 'features');
+mkdirSync(featuresDestDir, { recursive: true });
 
-// 3a. Copy auth-helpers.js
+// 3a. Copy auth-helpers.js (optional - may not exist in all builds)
 const authHelpersSrc = resolve(projectRoot, 'src/features/auth-helpers.js');
 const authHelpersDest = resolve(featuresDestDir, 'auth-helpers.js');
 try {
-  copyFile(authHelpersSrc, authHelpersDest, 'js/features/auth-helpers.js');
+  copyFileSync(authHelpersSrc, authHelpersDest);
+  console.log('✓ Copied js/features/auth-helpers.js');
 } catch (error) {
-  console.error('Warning: Could not copy auth-helpers.js:', error.message);
+  console.log('⊘ Skipped js/features/auth-helpers.js (not found)');
 }
 
-// 3b. Copy auth-errors.js
+// 3b. Copy auth-errors.js (optional)
 const authErrorsSrc = resolve(projectRoot, 'src/utils/auth-errors.js');
 const authErrorsDest = resolve(featuresDestDir, 'auth-errors.js');
 try {
-  copyFile(authErrorsSrc, authErrorsDest, 'js/features/auth-errors.js');
+  copyFileSync(authErrorsSrc, authErrorsDest);
+  console.log('✓ Copied js/features/auth-errors.js');
 } catch (error) {
-  console.error('Warning: Could not copy auth-errors.js:', error.message);
+  console.log('⊘ Skipped js/features/auth-errors.js (not found)');
 }
 
 // 3c. Copy authentication/ subdirectory
