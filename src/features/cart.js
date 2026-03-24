@@ -14,50 +14,79 @@ export class ShoppingCart {
         this.cartTotalEl = $('#cartTotal');
         
         this.bindEvents();
+        this.bindStaticButtons();
         this.renderCart();
         this.updateBadge();
     }
 
     bindEvents() {
-        // Add to cart buttons
-        $$('.btn-add-to-cart').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const target = e.currentTarget;
-                const product = target.dataset.product;
-                const price = parseFloat(target.dataset.price);
+        // Listen for custom addToCart events (from dynamically loaded products)
+        window.addEventListener('addToCart', (e) => {
+            const { productName, price, productId } = e.detail;
+            this.addItem({ 
+                id: productId || Date.now().toString(), 
+                name: productName, 
+                price: parseFloat(price) 
+            });
+            this.showToast(`${productName} added to cart!`);
+        });
+
+        // Cart button - navigate to cart page
+        const cartBtn = $('#cartBtn');
+        if (cartBtn) {
+            cartBtn.addEventListener('click', () => {
+                window.location.href = '/public/cart.html';
+            });
+        }
+
+        // Checkout logic
+        const checkoutBtn = $('#checkoutBtn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => this.checkout());
+        }
+        
+        // Remove item delegation inside modal
+        if (this.cartItemsContainer) {
+            this.cartItemsContainer.addEventListener('click', (e) => {
+                const removeBtn = e.target.closest('.cart-item-remove');
+                if (removeBtn) {
+                    const id = removeBtn.dataset.id;
+                    this.removeItem(id);
+                }
+            });
+        }
+        
+        // Use event delegation for add-to-cart buttons (works for dynamic content)
+        document.body.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-add-to-cart');
+            if (btn && !btn.disabled) {
+                e.preventDefault();
+                const product = btn.dataset.product;
+                const price = parseFloat(btn.dataset.price);
+                const productId = btn.dataset.productId || Date.now().toString();
                 
-                this.addItem({ id: Date.now().toString(), name: product, price: price });
+                this.addItem({ id: productId, name: product, price: price });
                 
                 // Animate button bounce
                 if (typeof anime !== 'undefined') {
                     anime({
-                        targets: target,
+                        targets: btn,
                         scale: [0.97, 1],
                         duration: 400,
                         easing: springPhysics.snap
                     });
                 }
                 
-                // Show toast notification instead of redirecting
                 this.showToast(`${product} added to cart!`);
-            });
-        });
-
-        // Cart button - navigate to cart page
-        $('#cartBtn')?.addEventListener('click', () => {
-            window.location.href = 'public/cart.html';
-        });
-
-        // Checkout logic
-        $('#checkoutBtn')?.addEventListener('click', () => this.checkout());
-        
-        // Remove item delegation inside modal
-        this.cartItemsContainer?.addEventListener('click', (e) => {
-            const removeBtn = e.target.closest('.cart-item-remove');
-            if (removeBtn) {
-                const id = removeBtn.dataset.id;
-                this.removeItem(id);
             }
+        });
+    }
+
+    bindStaticButtons() {
+        // Bind any static add-to-cart buttons that exist at page load
+        $$('.btn-add-to-cart').forEach(btn => {
+            // Mark as bound to avoid double-handling
+            btn.dataset.cartBound = 'true';
         });
     }
 

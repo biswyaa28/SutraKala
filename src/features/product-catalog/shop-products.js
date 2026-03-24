@@ -193,35 +193,7 @@ function renderProducts(container, products) {
   const productCards = products.map((product, index) => createProductCard(product, index)).join('')
   container.innerHTML = productCards + createCustomOrderCard()
 
-  // Re-initialize cart buttons for dynamically added products
-  initializeCartButtons()
-}
-
-/**
- * Initialize cart button event listeners
- */
-function initializeCartButtons() {
-  const cartButtons = document.querySelectorAll('.btn-add-to-cart')
-  cartButtons.forEach(button => {
-    // Remove existing listeners by cloning
-    const newButton = button.cloneNode(true)
-    button.parentNode.replaceChild(newButton, button)
-
-    newButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      const productName = newButton.dataset.product
-      const price = parseInt(newButton.dataset.price, 10)
-      const productId = newButton.dataset.productId
-
-      // Dispatch custom event for cart system
-      window.dispatchEvent(new CustomEvent('addToCart', {
-        detail: { productName, price, productId }
-      }))
-
-      // Show feedback
-      showToast(`${productName} added to cart!`)
-    })
-  })
+  // Cart buttons are handled by event delegation in cart.js - no extra setup needed
 }
 
 /**
