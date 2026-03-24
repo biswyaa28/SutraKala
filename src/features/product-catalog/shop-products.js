@@ -49,7 +49,7 @@ function createProductCard(product, index) {
     salePrice,
     image,
     imageUrl: productImageUrl,
-    inStock = true
+    estimatedDays
   } = product
 
   const productName = title || name || 'Untitled Product'
@@ -59,6 +59,7 @@ function createProductCard(product, index) {
   const displayPrice = salePrice || price
   const delayClass = index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : ''
   const productSlug = slug?.current || _id
+  const deliveryText = estimatedDays ? `${estimatedDays} days` : '5-7 days'
 
   return `
     <article class="shop-card fade-in-up ${delayClass}" data-product-id="${_id}">
@@ -69,11 +70,12 @@ function createProductCard(product, index) {
           loading="lazy"
           onerror="this.src='https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=400&h=400&fit=crop'"
         >
-        ${!inStock ? '<span class="out-of-stock-badge">Out of Stock</span>' : ''}
+        <span class="made-to-order-badge">Made to Order</span>
       </div>
       <div class="shop-card-body">
         <h2 class="shop-card-name">${productName}</h2>
         <p class="shop-card-desc">${description || 'Beautiful handcrafted item from SutraKala.'}</p>
+        <p class="shop-card-delivery"><i class="fas fa-clock" aria-hidden="true"></i> Delivery: ~${deliveryText}</p>
       </div>
       <div class="shop-card-footer">
         <span class="shop-card-price">
@@ -85,11 +87,10 @@ function createProductCard(product, index) {
           data-product="${productName}" 
           data-price="${displayPrice}"
           data-product-id="${_id}"
-          ${!inStock ? 'disabled' : ''}
           aria-label="Add ${productName} to cart"
         >
           <i class="fas fa-shopping-bag" aria-hidden="true"></i> 
-          ${inStock ? 'Add to Cart' : 'Sold Out'}
+          Add to Cart
         </button>
       </div>
     </article>
@@ -259,8 +260,8 @@ export async function initShopProducts() {
   renderLoading(container)
 
   try {
-    // Fetch in-stock products from Sanity
-    const products = await fetchProducts({ inStock: true })
+    // Fetch all products from Sanity (all are made-to-order, always available)
+    const products = await fetchProducts()
     renderProducts(container, products)
   } catch (error) {
     renderError(container, error)

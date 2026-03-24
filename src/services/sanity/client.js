@@ -135,27 +135,14 @@ export default sanityClient
 /**
  * Fetch products from Sanity with optional filters
  * @param {Object} filters - Filter options
- * @param {boolean} [filters.featured] - Filter for featured products only
- * @param {boolean} [filters.inStock] - Filter for in-stock products only
  * @param {string} [filters.category] - Filter by category slug
  * @param {number} [filters.limit] - Limit number of results
  * @returns {Promise<Array>} Array of product documents
  */
 export async function fetchProducts(filters = {}) {
-  const { featured, inStock, category, limit } = filters
+  const { category, limit } = filters
 
   let filterConditions = ['_type == "product"']
-
-  if (featured === true) {
-    filterConditions.push(`featured == true`)
-  }
-
-  // Only filter by inStock if explicitly requested - treat undefined as in stock
-  if (inStock === true) {
-    filterConditions.push(`(inStock == true || !defined(inStock))`)
-  } else if (inStock === false) {
-    filterConditions.push(`inStock == false`)
-  }
 
   if (category) {
     filterConditions.push(`category->slug.current == "${category}"`)
@@ -176,15 +163,13 @@ export async function fetchProducts(filters = {}) {
       salePrice,
       image,
       "imageUrl": image.asset->url,
-      images,
       category->{
         _id,
         title,
         slug
       },
-      inStock,
-      stockCount,
-      featured
+      madeToOrder,
+      estimatedDays
     }
   `
 

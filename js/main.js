@@ -974,27 +974,14 @@
     /**
      * Fetch products from Sanity with optional filters
      * @param {Object} filters - Filter options
-     * @param {boolean} [filters.featured] - Filter for featured products only
-     * @param {boolean} [filters.inStock] - Filter for in-stock products only
      * @param {string} [filters.category] - Filter by category slug
      * @param {number} [filters.limit] - Limit number of results
      * @returns {Promise<Array>} Array of product documents
      */
     async function fetchProducts(filters = {}) {
-      const { featured, inStock, category, limit } = filters;
+      const { category, limit } = filters;
 
       let filterConditions = ['_type == "product"'];
-
-      if (featured === true) {
-        filterConditions.push(`featured == true`);
-      }
-
-      // Only filter by inStock if explicitly requested - treat undefined as in stock
-      if (inStock === true) {
-        filterConditions.push(`(inStock == true || !defined(inStock))`);
-      } else if (inStock === false) {
-        filterConditions.push(`inStock == false`);
-      }
 
       if (category) {
         filterConditions.push(`category->slug.current == "${category}"`);
@@ -1015,15 +1002,13 @@
       salePrice,
       image,
       "imageUrl": image.asset->url,
-      images,
       category->{
         _id,
         title,
         slug
       },
-      inStock,
-      stockCount,
-      featured
+      madeToOrder,
+      estimatedDays
     }
   `;
 
@@ -1086,7 +1071,7 @@
         salePrice,
         image,
         imageUrl: productImageUrl,
-        inStock = true
+        estimatedDays
       } = product;
 
       const productName = title || name || 'Untitled Product';
@@ -1096,6 +1081,7 @@
       const displayPrice = salePrice || price;
       const delayClass = index % 3 === 1 ? 'delay-1' : index % 3 === 2 ? 'delay-2' : '';
       slug?.current || _id;
+      const deliveryText = estimatedDays ? `${estimatedDays} days` : '5-7 days';
 
       return `
     <article class="shop-card fade-in-up ${delayClass}" data-product-id="${_id}">
@@ -1106,11 +1092,12 @@
           loading="lazy"
           onerror="this.src='https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=400&h=400&fit=crop'"
         >
-        ${!inStock ? '<span class="out-of-stock-badge">Out of Stock</span>' : ''}
+        <span class="made-to-order-badge">Made to Order</span>
       </div>
       <div class="shop-card-body">
         <h2 class="shop-card-name">${productName}</h2>
         <p class="shop-card-desc">${description || 'Beautiful handcrafted item from SutraKala.'}</p>
+        <p class="shop-card-delivery"><i class="fas fa-clock" aria-hidden="true"></i> Delivery: ~${deliveryText}</p>
       </div>
       <div class="shop-card-footer">
         <span class="shop-card-price">
@@ -1122,11 +1109,10 @@
           data-product="${productName}" 
           data-price="${displayPrice}"
           data-product-id="${_id}"
-          ${!inStock ? 'disabled' : ''}
           aria-label="Add ${productName} to cart"
         >
           <i class="fas fa-shopping-bag" aria-hidden="true"></i> 
-          ${inStock ? 'Add to Cart' : 'Sold Out'}
+          Add to Cart
         </button>
       </div>
     </article>
@@ -1296,8 +1282,8 @@
       renderLoading(container);
 
       try {
-        // Fetch in-stock products from Sanity
-        const products = await fetchProducts({ inStock: true });
+        // Fetch all products from Sanity (all are made-to-order, always available)
+        const products = await fetchProducts();
         renderProducts(container, products);
       } catch (error) {
         renderError(container, error);
