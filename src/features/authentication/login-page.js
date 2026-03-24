@@ -1,13 +1,13 @@
-// js/features/auth/login-page.js
+// js/features/authentication/login-page.js
 /**
  * Login Page Component
  * Handles Google authentication on the dedicated login page
  * Redirects users back to the referring page after successful login
  */
 
-import { initFirebase } from '../../firebase-init.js';
-import { signInWithGoogle } from '../../core/auth-helpers.js';
-import { authManager } from '../../core/auth-manager.js';
+import { initFirebase } from '../../config/firebase-init.js';
+import { signInWithGoogle } from '../auth-helpers.js';
+import { authManager } from './auth-manager.js';
 
 class LoginPage {
   constructor() {
@@ -15,7 +15,7 @@ class LoginPage {
     this.errorMessageEl = null;
     this.loginContentEl = null;
     this.redirectUrl = null;
-    
+
     this.init();
   }
 
@@ -23,7 +23,6 @@ class LoginPage {
    * Initialize login page
    */
   async init() {
-
     // Get DOM elements
     this.googleLoginBtn = document.getElementById('googleLoginBtn');
     this.errorMessageEl = document.getElementById('errorMessage');
@@ -39,13 +38,12 @@ class LoginPage {
 
       // Initialize AuthManager
       await authManager.init();
-      
+
       // Check if user is already logged in
       await this.checkAuthState();
 
       // Bind events
       this.bindEvents();
-
     } catch (error) {
       this.showError('Failed to initialize authentication system. Please refresh the page.', '');
     }
@@ -57,10 +55,10 @@ class LoginPage {
   async checkAuthState() {
     try {
       // Wait a bit for auth state to settle
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       const user = authManager.getUser();
-      
+
       if (user) {
         this.showSuccess();
         setTimeout(() => {
@@ -84,7 +82,6 @@ class LoginPage {
    */
   async handleGoogleLogin() {
     try {
-      
       // Clear any previous errors
       this.hideError();
 
@@ -96,16 +93,14 @@ class LoginPage {
 
       // Show success message briefly, then redirect
       this.showSuccess();
-      
+
       setTimeout(() => {
         this.redirectAfterLogin();
       }, 1000);
-
     } catch (error) {
-      
       // Restore form
       this.setLoading(false);
-      
+
       // Get user-friendly error message
       const errorMessage = this.getFriendlyErrorMessage(error);
       this.showError(errorMessage, error.code);
@@ -119,7 +114,7 @@ class LoginPage {
    */
   getFriendlyErrorMessage(error) {
     const errorCode = error.code;
-    
+
     if (errorCode === 'auth/popup-closed-by-user') {
       return 'Sign-in was cancelled. Please try again.';
     } else if (errorCode === 'auth/popup-blocked') {
@@ -185,7 +180,7 @@ class LoginPage {
     // Re-bind elements
     this.googleLoginBtn = document.getElementById('googleLoginBtn');
     this.errorMessageEl = document.getElementById('errorMessage');
-    
+
     // Re-bind events
     this.bindEvents();
   }
@@ -216,7 +211,7 @@ class LoginPage {
     if (!this.errorMessageEl) return;
 
     let errorHTML = `<strong>⚠️ Sign-In Failed</strong><br>${message}`;
-    
+
     // Add helpful links based on error code
     if (errorCode === 'auth/unauthorized-domain') {
       errorHTML += `<br><br><a href="GOOGLE_SIGNIN_FIX.md" target="_blank" style="color: #764ba2; text-decoration: underline;">📖 View Fix Guide</a>`;
@@ -225,7 +220,7 @@ class LoginPage {
     } else if (errorCode === 'auth/popup-blocked') {
       errorHTML += `<br><br><small>💡 Tip: Allow popups for this site, or we'll try a different method.</small>`;
     }
-    
+
     this.errorMessageEl.innerHTML = errorHTML;
     this.errorMessageEl.classList.add('show');
   }
@@ -244,10 +239,9 @@ class LoginPage {
    * Redirect user after successful login
    */
   redirectAfterLogin() {
-    
     // Clean the redirect URL to prevent open redirect vulnerabilities
     const cleanUrl = this.sanitizeRedirectUrl(this.redirectUrl);
-    
+
     window.location.href = cleanUrl;
   }
 
@@ -264,7 +258,7 @@ class LoginPage {
 
     // Remove any leading slashes and ensure it's a local path
     const cleanUrl = url.replace(/^\/+/, '');
-    
+
     // Whitelist of allowed pages
     const allowedPages = [
       'index.html',

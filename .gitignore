@@ -16,6 +16,11 @@ public/*.map
 dist/
 build/
 
+# Build output (root)
+css/
+js/
+*.map
+
 # Firebase
 .firebase/
 firebase-debug.log*

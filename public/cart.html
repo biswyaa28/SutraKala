@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Shared stylesheet -->
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
 
   <style>
     /* Cart Page Styles */
@@ -302,6 +302,150 @@
       background: #EBDEF0;
       transform: translateY(-1px);
     }
+
+    /* Mobile & Tablet Optimizations for Cart */
+    @media (max-width: 767px) {
+      .cart-page {
+        padding: calc(60px + 1rem) 0 2rem;
+      }
+
+      .cart-container {
+        padding: 0 16px;
+      }
+
+      .cart-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 0;
+      }
+
+      .cart-item-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 1rem;
+      }
+
+      .cart-item-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .cart-item-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .qty-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .qty-btn {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-lavender);
+        border: 1px solid var(--color-mint);
+        border-radius: 50%;
+        font-size: 1.25rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .qty-btn:active {
+        transform: scale(0.95);
+        background: var(--color-mint);
+      }
+
+      .qty-value {
+        min-width: 40px;
+        text-align: center;
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+
+      .cart-item-remove {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .cart-items-section,
+      .checkout-section {
+        padding: 1.5rem;
+      }
+
+      .summary-card {
+        position: sticky;
+        bottom: 0;
+        margin: 0 -16px;
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -4px 16px rgba(142, 68, 173, 0.15);
+      }
+
+      .btn-checkout {
+        min-height: 52px;
+        font-size: 1.0625rem;
+        padding: 14px 24px;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        min-height: 48px;
+        font-size: 16px; /* Prevents iOS zoom */
+      }
+
+      .cart-header h1 {
+        font-size: clamp(1.75rem, 7vw, 2rem);
+      }
+
+      .btn-continue-shopping {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .cart-container {
+        padding: 0 32px;
+      }
+
+      .cart-item-image {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* Landscape mode on mobile */
+    @media (max-width: 767px) and (orientation: landscape) {
+      .cart-page {
+        padding: calc(50px + 1rem) 0 1rem;
+      }
+
+      .summary-card {
+        position: static;
+        margin: 0;
+      }
+    }
+  
   </style>
 </head>
 
@@ -311,10 +455,10 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">
-          <a href="index.html" aria-label="SutraKala Home">
+          <a href="../index.html" aria-label="SutraKala Home">
             <picture>
-              <source srcset="assets/images/logo.webp" type="image/webp">
-              <img src="assets/images/logo.jpg?v=2" alt="Logo" class="site-logo">
+              <source srcset="../assets/images/logo.webp" type="image/webp">
+              <img src="../assets/images/logo.jpg?v=2" alt="Logo" class="site-logo">
             </picture>
             <span class="logo-text">SutraKala</span>
           </a>
@@ -322,14 +466,17 @@
 
         <nav class="nav-menu" role="navigation" aria-label="Main navigation">
           <ul class="nav-list">
-            <li><a href="shop.html" class="nav-link">Shop</a></li>
-            <li><a href="index.html#about" class="nav-link">About</a></li>
-            <li><a href="index.html#gallery" class="nav-link">Gallery</a></li>
-            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            <li><a href="../shop.html" class="nav-link">Shop</a></li>
+            <li><a href="../index.html#about" class="nav-link">About</a></li>
+            <li><a href="../index.html#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
           </ul>
         </nav>
 
         <div class="header-actions">
+          <!-- Auth UI Container (Login button / User avatar) -->
+          <div id="authUIContainer" class="auth-ui-container"></div>
+
           <button class="cart-button" aria-label="Shopping cart" id="cartBtn">
             <i class="fas fa-shopping-bag" aria-hidden="true"></i>
             <span class="cart-count" id="cartCount" aria-live="polite">0</span>
@@ -344,10 +491,10 @@
       <!-- Mobile Menu -->
       <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-nav-list">
-          <li><a href="shop.html" class="mobile-nav-link">Shop</a></li>
-          <li><a href="index.html#about" class="mobile-nav-link">About</a></li>
-          <li><a href="index.html#gallery" class="mobile-nav-link">Gallery</a></li>
-          <li><a href="index.html#contact" class="mobile-nav-link">Contact</a></li>
+          <li><a href="../shop.html" class="mobile-nav-link">Shop</a></li>
+          <li><a href="../index.html#about" class="mobile-nav-link">About</a></li>
+          <li><a href="../index.html#gallery" class="mobile-nav-link">Gallery</a></li>
+          <li><a href="../index.html#contact" class="mobile-nav-link">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -445,7 +592,7 @@
     <div class="container">
       <div class="footer-compact">
         <div class="footer-brand">
-          <a href="index.html" class="footer-logo group">
+          <a href="/" class="footer-logo group">
             <picture>
               <source srcset="assets/images/logo.webp" type="image/webp">
               <img src="assets/images/logo.jpg" alt="SutraKala Logo" class="footer-site-logo spin-on-hover">
@@ -492,7 +639,16 @@
   </div>
 
   <!-- JavaScript -->
-  <script type="module" src="js/cart-page.js"></script>
+  <!-- Firebase Configuration -->
+  <script src="../js/firebase-config.js"></script>
+
+  <!-- Firebase Initialization -->
+  <script type="module" src="../js/firebase-init.js"></script>
+
+  <!-- Authentication System -->
+  <script type="module" src="../js/auth-init.js"></script>
+
+  <script type="module" src="../js/cart-page.js"></script>
 </body>
 
 </html>

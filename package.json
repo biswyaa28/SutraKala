@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "npm-run-all --parallel watch:css watch:js serve",
-    "build": "npm-run-all build:css build:js build:optimize",
-    "build:css": "postcss src/styles/main.css -o public/css/main.css",
+    "build": "npm-run-all build:css build:js build:post",
+    "build:css": "node scripts/build/css.js",
     "build:js": "rollup -c config/rollup.config.js",
+    "build:post": "node scripts/build/post-build.js",
     "build:optimize": "npm-run-all optimize:images minify:css minify:js",
     "optimize:images": "node scripts/build/optimize-images.js",
     "minify:css": "cleancss -o public/css/main.min.css public/css/main.css",
@@ -26,10 +27,13 @@
     "lint:css": "stylelint src/styles/",
     "lint:css:fix": "stylelint src/styles/ --fix",
     "security:check": "npm audit && snyk test",
-    "watch:css": "postcss src/styles/main.css -o public/css/main.css --watch",
+    "watch:css": "node scripts/build/css.js --watch",
     "watch:js": "rollup -c config/rollup.config.js --watch",
     "clean": "rimraf public/css public/js .firebase",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "build:vite": "vite build",
+    "dev:vite": "vite",
+    "preview": "vite preview"
   },
   "keywords": [
     "ecommerce",
@@ -54,6 +58,7 @@
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.32",
     "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.1.1",
     "postcss-preset-env": "^9.3.0",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",

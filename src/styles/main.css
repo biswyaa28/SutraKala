@@ -1,87 +1,28 @@
-/**
- * SutraKala Main Stylesheet
- * Enterprise-grade CSS architecture using BEM methodology
- *
- * Table of Contents:
- * 1. Base Styles (variables, reset, typography)
- * 2. Components (atoms, molecules, organisms)
- * 3. Utilities (helpers, layout)
- * 4. Themes (dark mode, custom themes)
- */
+/* css/main.css */
+@import url('_variables.css');
+@import url('_mixins.css');
+@import url('_typography.css');
+@import url('_layout.css');
 
-/* ==========================================================================
-   1. BASE STYLES
-   ========================================================================== */
+@import url('_components/button.css');
+@import url('_components/card.css');
+@import url('_components/form.css');
+@import url('_components/nav.css');
+@import url('_components/hero.css');
+@import url('_components/header.css');
+@import url('_components/footer.css');
+@import url('_components/animations.css');
+@import url('_components/modal.css');
+@import url('_components/auth.css');
 
-/* Variables */
-@import "./base/variables.css";
+@import url('_sections/hero.css');
+@import url('_sections/products.css');
+@import url('_sections/about.css');
+@import url('_sections/gallery.css');
+@import url('_sections/contact.css');
 
-/* Mixins */
-@import "./base/mixins.css";
-
-/* Reset & Normalize */
-@import "./base/reset.css";
-
-/* Typography */
-@import "./base/typography.css";
-
-/* Layout */
-@import "./base/layout.css";
-
-/* ==========================================================================
-   2. COMPONENTS
-   ========================================================================== */
-
-/* Atoms - Basic building blocks */
-@import "./components/button.css";
-@import "./components/input.css";
-@import "./components/card.css";
-@import "./components/badge.css";
-@import "./components/avatar.css";
-@import "./components/icon.css";
-
-/* Molecules - Composite components */
-@import "./components/product-card.css";
-@import "./components/cart-item.css";
-@import "./components/form-group.css";
-@import "./components/search-bar.css";
-@import "./components/nav-item.css";
-
-/* Organisms - Complex components */
-@import "./components/header.css";
-@import "./components/footer.css";
-@import "./components/product-grid.css";
-@import "./components/cart-modal.css";
-@import "./components/login-modal.css";
-@import "./components/hero-section.css";
-
-/* ==========================================================================
-   3. UTILITIES
-   ========================================================================== */
-
-/* Layout utilities */
-@import "./utilities/flex.css";
-@import "./utilities/grid.css";
-@import "./utilities/spacing.css";
-
-/* Visibility utilities */
-@import "./utilities/visibility.css";
-
-/* Text utilities */
-@import "./utilities/typography.css";
-
-/* Animation utilities */
-@import "./utilities/animations.css";
-
-/* ==========================================================================
-   4. THEMES
-   ========================================================================== */
-
-/* Default theme (light mode) */
-@import "./themes/light.css";
-
-/* Dark mode theme */
-@import "./themes/dark.css";
-
-/* Custom theme overrides */
-@import "./themes/custom.css";
+/* Base Overrides */
+body {
+  background-color: var(--color-cream);
+  background-image: var(--texture-woven);
+}

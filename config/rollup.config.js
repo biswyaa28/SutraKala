@@ -5,8 +5,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isStaging = process.env.NODE_ENV === 'staging';
 
+// Main configuration
 export default {
   input: 'src/main.js',
   output: {
@@ -53,34 +53,9 @@ export default {
     exclude: ['node_modules/**', 'public/**', 'tests/**', 'docs/**']
   },
   onwarn: (warning, warn) => {
-    // Suppress certain warnings
     if (warning.code === 'CIRCULAR_DEPENDENCY') return;
     if (warning.code === 'EVAL') return;
     if (warning.code === 'THIS_IS_UNDEFINED') return;
     warn(warning);
   }
 };
-
-// Additional entry points for code splitting (future use)
-export const additionalConfigs = [
-  {
-    input: 'src/pages/cart/cart-page.js',
-    output: {
-      file: isProduction ? 'public/js/cart-page.min.js' : 'public/js/cart-page.js',
-      format: 'iife',
-      name: 'CartPage',
-      sourcemap: !isProduction
-    },
-    plugins: [resolve({ browser: true }), commonjs(), ...(isProduction ? [terser()] : [])]
-  },
-  {
-    input: 'src/pages/login/index.js',
-    output: {
-      file: isProduction ? 'public/js/login.min.js' : 'public/js/login.js',
-      format: 'iife',
-      name: 'LoginPage',
-      sourcemap: !isProduction
-    },
-    plugins: [resolve({ browser: true }), commonjs(), ...(isProduction ? [terser()] : [])]
-  }
-];

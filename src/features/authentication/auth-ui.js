@@ -1,11 +1,11 @@
-// js/features/auth/auth-ui.js
+// js/features/authentication/auth-ui.js
 /**
  * Authentication UI Component for Navbar
  * Manages login button and user dropdown in the header
  */
 
-import { authManager } from '../../core/auth-manager.js';
-import { signOut } from '../../core/auth-helpers.js';
+import { authManager } from './auth-manager.js';
+import { signOut } from '../auth-helpers.js';
 import { formatPhoneForDisplay } from '../../utils/auth-errors.js';
 
 export class AuthUI {
@@ -17,7 +17,7 @@ export class AuthUI {
 
     this.isDropdownOpen = false;
     this.unsubscribers = [];
-    
+
     this.init();
   }
 
@@ -25,7 +25,6 @@ export class AuthUI {
    * Initialize auth UI
    */
   async init() {
-
     // Show loading state initially
     this.renderLoading();
 
@@ -43,7 +42,6 @@ export class AuthUI {
         loading: authManager.isLoading()
       };
       this.render(currentState);
-      
     } catch (error) {
       // Show error state but don't crash
       this.container.innerHTML = `
@@ -87,8 +85,8 @@ export class AuthUI {
    */
   renderLoggedOut() {
     this.container.innerHTML = `
-      <button 
-        class="auth-login-btn" 
+      <button
+        class="auth-login-btn"
         id="authLoginBtn"
         aria-label="Login to your account"
       >
@@ -109,27 +107,29 @@ export class AuthUI {
    */
   renderLoggedIn(user, userData) {
     // Get display name or phone
-    const displayName = user.displayName || (user.phoneNumber ? formatPhoneForDisplay(user.phoneNumber) : 'User');
-    
+    const displayName =
+      user.displayName || (user.phoneNumber ? formatPhoneForDisplay(user.phoneNumber) : 'User');
+
     // Get avatar initial
     const avatarInitial = this.getAvatarInitial(user);
-    
+
     // Get avatar image
     const avatarImage = user.photoURL;
 
     this.container.innerHTML = `
       <div class="auth-user-menu">
-        <button 
-          class="auth-avatar-btn" 
+        <button
+          class="auth-avatar-btn"
           id="authAvatarBtn"
           aria-label="User menu"
           aria-expanded="false"
           aria-haspopup="true"
         >
           <div class="auth-avatar">
-            ${avatarImage 
-              ? `<img src="${avatarImage}" alt="${displayName}" class="auth-avatar-img">` 
-              : `<span class="auth-avatar-initial">${avatarInitial}</span>`
+            ${
+              avatarImage
+                ? `<img src="${avatarImage}" alt="${displayName}" class="auth-avatar-img">`
+                : `<span class="auth-avatar-initial">${avatarInitial}</span>`
             }
           </div>
           <i class="fas fa-chevron-down auth-avatar-chevron" aria-hidden="true"></i>
@@ -180,18 +180,18 @@ export class AuthUI {
       // Use first letter of display name
       return user.displayName.charAt(0).toUpperCase();
     }
-    
+
     if (user.email) {
       // Use first letter of email
       return user.email.charAt(0).toUpperCase();
     }
-    
+
     if (user.phoneNumber) {
       // Use last 2 digits of phone
       const digits = user.phoneNumber.replace(/\D/g, '');
       return digits.slice(-2);
     }
-    
+
     return 'U';
   }
 
@@ -249,7 +249,7 @@ export class AuthUI {
   openDropdown() {
     const dropdown = this.container.querySelector('#authDropdown');
     const avatarBtn = this.container.querySelector('#authAvatarBtn');
-    
+
     if (!dropdown) return;
 
     dropdown.removeAttribute('hidden');
@@ -264,17 +264,17 @@ export class AuthUI {
   closeDropdown() {
     const dropdown = this.container.querySelector('#authDropdown');
     const avatarBtn = this.container.querySelector('#authAvatarBtn');
-    
+
     if (!dropdown) return;
 
     dropdown.classList.remove('auth-dropdown-open');
     avatarBtn?.setAttribute('aria-expanded', 'false');
-    
+
     // Wait for animation before hiding
     setTimeout(() => {
       dropdown.setAttribute('hidden', '');
     }, 200);
-    
+
     this.isDropdownOpen = false;
   }
 
@@ -284,10 +284,9 @@ export class AuthUI {
   openLoginModal() {
     // Get current page URL for redirect after login
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    
+
     // Redirect to login page with return URL
-    window.location.href = `login.html?redirect=${encodeURIComponent(currentPage)}`;
-    
+    window.location.href = `public/login.html?redirect=${encodeURIComponent(currentPage)}`;
   }
 
   /**
@@ -296,16 +295,15 @@ export class AuthUI {
   async handleLogout() {
     try {
       this.closeDropdown();
-      
+
       // Show loading state
       this.renderLoading();
-      
+
       // Sign out
       await signOut();
-      
+
       // Show success message
       this.showToast('Logged out successfully');
-      
     } catch (error) {
       this.showToast('Logout failed. Please try again.', 'error');
     }
@@ -319,14 +317,14 @@ export class AuthUI {
   showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
-    
+
     if (!toast || !toastMessage) return;
 
     toastMessage.textContent = message;
     toast.className = `toast ${type === 'error' ? 'toast-error' : ''}`;
     toast.hidden = false;
     toast.classList.add('show');
-    
+
     setTimeout(() => {
       toast.classList.remove('show');
       setTimeout(() => {
@@ -340,13 +338,12 @@ export class AuthUI {
    */
   destroy() {
     // Unsubscribe from all listeners
-    this.unsubscribers.forEach(unsubscribe => unsubscribe());
+    this.unsubscribers.forEach((unsubscribe) => unsubscribe());
     this.unsubscribers = [];
-    
+
     // Clear container
     if (this.container) {
       this.container.innerHTML = '';
     }
-    
   }
 }

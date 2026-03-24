@@ -1,27 +1,19 @@
-// js/features/auth/login-modal.js
+// js/features/authentication/login-modal.js
 /**
  * Login Modal Component
  * Manages authentication flow with state machine: initial → phone-input → otp-verify → success
  */
 
-import { PhoneInput } from "./phone-input.js";
-import { OTPInput } from "./otp-input.js";
-import {
-  signInWithGoogle,
-  sendPhoneOTP,
-  verifyPhoneOTP,
-  initRecaptcha,
-} from "../../core/auth-helpers.js";
-import {
-  getAuthErrorMessage,
-  formatPhoneForDisplay,
-} from "../../utils/auth-errors.js";
+import { PhoneInput } from './phone-input.js';
+import { OTPInput } from './otp-input.js';
+import { signInWithGoogle, sendPhoneOTP, verifyPhoneOTP, initRecaptcha } from '../auth-helpers.js';
+import { getAuthErrorMessage, formatPhoneForDisplay } from '../../utils/auth-errors.js';
 
 export class LoginModal {
-  constructor(modalId = "loginModal") {
+  constructor(modalId = 'loginModal') {
     this.modalId = modalId;
     this.modal = null;
-    this.state = "initial"; // initial | phone-input | otp-verify | loading | success | error
+    this.state = 'initial'; // initial | phone-input | otp-verify | loading | success | error
     this.phoneNumber = null;
     this.confirmationResult = null; // Store the confirmation result
     this.recaptchaVerifier = null;
@@ -45,7 +37,7 @@ export class LoginModal {
     this.modal = document.getElementById(this.modalId);
 
     // Listen for open event from AuthUI
-    window.addEventListener("openLoginModal", () => this.open());
+    window.addEventListener('openLoginModal', () => this.open());
   }
 
   /**
@@ -70,7 +62,7 @@ export class LoginModal {
       </div>
     `;
 
-    document.body.insertAdjacentHTML("beforeend", modalHTML);
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
   }
 
   /**
@@ -80,11 +72,11 @@ export class LoginModal {
     if (!this.modal) return;
 
     // Reset to initial state
-    this.setState("initial");
+    this.setState('initial');
 
     // Show modal
-    this.modal.removeAttribute("hidden");
-    setTimeout(() => this.modal.classList.add("is-open"), 10);
+    this.modal.removeAttribute('hidden');
+    setTimeout(() => this.modal.classList.add('is-open'), 10);
 
     // Bind close events
     this.bindCloseEvents();
@@ -96,10 +88,10 @@ export class LoginModal {
   close() {
     if (!this.modal) return;
 
-    this.modal.classList.remove("is-open");
+    this.modal.classList.remove('is-open');
 
     setTimeout(() => {
-      this.modal.setAttribute("hidden", "");
+      this.modal.setAttribute('hidden', '');
       this.cleanup();
     }, 300);
   }
@@ -108,20 +100,20 @@ export class LoginModal {
    * Bind modal close events
    */
   bindCloseEvents() {
-    const closeBtn = this.modal.querySelector(".modal-close");
-    const overlay = this.modal.querySelector(".modal-overlay");
+    const closeBtn = this.modal.querySelector('.modal-close');
+    const overlay = this.modal.querySelector('.modal-overlay');
 
-    closeBtn?.addEventListener("click", () => this.close());
-    overlay?.addEventListener("click", () => this.close());
+    closeBtn?.addEventListener('click', () => this.close());
+    overlay?.addEventListener('click', () => this.close());
 
     // Close on Escape key
     const handleEscape = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         this.close();
-        document.removeEventListener("keydown", handleEscape);
+        document.removeEventListener('keydown', handleEscape);
       }
     };
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener('keydown', handleEscape);
   }
 
   /**
@@ -137,23 +129,23 @@ export class LoginModal {
    * Render modal content based on state
    */
   render() {
-    const body = this.modal?.querySelector("#loginModalBody");
+    const body = this.modal?.querySelector('#loginModalBody');
     if (!body) return;
 
     switch (this.state) {
-      case "initial":
+      case 'initial':
         this.renderInitial(body);
         break;
-      case "phone-input":
+      case 'phone-input':
         this.renderPhoneInput(body);
         break;
-      case "otp-verify":
+      case 'otp-verify':
         this.renderOTPVerify(body);
         break;
-      case "loading":
+      case 'loading':
         this.renderLoading(body);
         break;
-      case "success":
+      case 'success':
         this.renderSuccess(body);
         break;
       default:
@@ -195,11 +187,11 @@ export class LoginModal {
     // Bind button events
     setTimeout(() => {
       document
-        .getElementById("googleLoginBtn")
-        ?.addEventListener("click", () => this.handleGoogleLogin());
+        .getElementById('googleLoginBtn')
+        ?.addEventListener('click', () => this.handleGoogleLogin());
       document
-        .getElementById("phoneLoginBtn")
-        ?.addEventListener("click", () => this.setState("phone-input"));
+        .getElementById('phoneLoginBtn')
+        ?.addEventListener('click', () => this.setState('phone-input'));
     }, 0);
   }
 
@@ -243,23 +235,19 @@ export class LoginModal {
 
     // Initialize phone input component
     setTimeout(() => {
-      const phoneInput = document.getElementById("phoneInput");
+      const phoneInput = document.getElementById('phoneInput');
       if (phoneInput) {
         this.phoneInputComponent = new PhoneInput(phoneInput);
         phoneInput.focus();
       }
 
       // Bind events
-      document
-        .getElementById("backBtn")
-        ?.addEventListener("click", () => this.setState("initial"));
-      document
-        .getElementById("sendOTPBtn")
-        ?.addEventListener("click", () => this.handleSendOTP());
+      document.getElementById('backBtn')?.addEventListener('click', () => this.setState('initial'));
+      document.getElementById('sendOTPBtn')?.addEventListener('click', () => this.handleSendOTP());
 
       // Send OTP on Enter key
-      phoneInput?.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
+      phoneInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
           this.handleSendOTP();
         }
       });
@@ -296,13 +284,13 @@ export class LoginModal {
 
     // Initialize OTP input component
     setTimeout(() => {
-      const otpWrapper = document.getElementById("otpInputWrapper");
+      const otpWrapper = document.getElementById('otpInputWrapper');
       if (otpWrapper) {
         this.otpInputComponent = new OTPInput(otpWrapper, {
           length: 6,
-          type: "numeric",
+          type: 'numeric',
           autoSubmit: false,
-          onComplete: (code) => {},
+          onComplete: (code) => {}
         });
       }
 
@@ -310,16 +298,14 @@ export class LoginModal {
       this.startResendCountdown();
 
       // Bind events
-      document.getElementById("backBtn")?.addEventListener("click", () => {
+      document.getElementById('backBtn')?.addEventListener('click', () => {
         this.clearResendTimer();
-        this.setState("phone-input");
+        this.setState('phone-input');
       });
       document
-        .getElementById("verifyOTPBtn")
-        ?.addEventListener("click", () => this.handleVerifyOTP());
-      document
-        .getElementById("resendBtn")
-        ?.addEventListener("click", () => this.handleResendOTP());
+        .getElementById('verifyOTPBtn')
+        ?.addEventListener('click', () => this.handleVerifyOTP());
+      document.getElementById('resendBtn')?.addEventListener('click', () => this.handleResendOTP());
     }, 0);
   }
 
@@ -358,14 +344,14 @@ export class LoginModal {
    */
   async handleGoogleLogin() {
     try {
-      this.setState("loading");
+      this.setState('loading');
 
       const result = await signInWithGoogle();
 
-      this.setState("success");
+      this.setState('success');
     } catch (error) {
-      this.showError(error.message || "Failed to sign in with Google");
-      this.setState("initial");
+      this.showError(error.message || 'Failed to sign in with Google');
+      this.setState('initial');
     }
   }
 
@@ -376,35 +362,27 @@ export class LoginModal {
     try {
       // Validate phone number
       if (!this.phoneInputComponent || !this.phoneInputComponent.validate()) {
-        this.phoneInputComponent?.setError(
-          "Please enter a valid 10-digit mobile number",
-        );
+        this.phoneInputComponent?.setError('Please enter a valid 10-digit mobile number');
         return;
       }
 
       const phoneNumber = this.phoneInputComponent.getFormattedValue();
       this.phoneNumber = phoneNumber;
 
-      this.setState("loading");
+      this.setState('loading');
 
       // Initialize reCAPTCHA if not already done
       if (!this.recaptchaVerifier) {
-        this.recaptchaVerifier = await initRecaptcha(
-          "recaptcha-container",
-          true,
-        );
+        this.recaptchaVerifier = await initRecaptcha('recaptcha-container', true);
       }
 
       // Send OTP
-      this.confirmationResult = await sendPhoneOTP(
-        phoneNumber,
-        this.recaptchaVerifier,
-      );
+      this.confirmationResult = await sendPhoneOTP(phoneNumber, this.recaptchaVerifier);
 
-      this.setState("otp-verify");
+      this.setState('otp-verify');
     } catch (error) {
-      this.showError(error.message || "Failed to send OTP");
-      this.setState("phone-input");
+      this.showError(error.message || 'Failed to send OTP');
+      this.setState('phone-input');
     }
   }
 
@@ -414,22 +392,22 @@ export class LoginModal {
   async handleVerifyOTP() {
     try {
       if (!this.otpInputComponent || !this.otpInputComponent.isFilled()) {
-        this.otpInputComponent?.setError("Please enter the complete OTP");
+        this.otpInputComponent?.setError('Please enter the complete OTP');
         return;
       }
 
       const otpCode = this.otpInputComponent.getValue();
 
-      this.setState("loading");
+      this.setState('loading');
 
       // Verify OTP
       const result = await verifyPhoneOTP(this.confirmationResult, otpCode);
 
-      this.setState("success");
+      this.setState('success');
     } catch (error) {
-      this.otpInputComponent?.setError(error.message || "Invalid OTP");
+      this.otpInputComponent?.setError(error.message || 'Invalid OTP');
       this.otpInputComponent?.clear();
-      this.setState("otp-verify");
+      this.setState('otp-verify');
     }
   }
 
@@ -442,17 +420,14 @@ export class LoginModal {
       this.otpInputComponent?.clear();
 
       // Re-send OTP with same phone number
-      this.confirmationResult = await sendPhoneOTP(
-        this.phoneNumber,
-        this.recaptchaVerifier,
-      );
+      this.confirmationResult = await sendPhoneOTP(this.phoneNumber, this.recaptchaVerifier);
 
-      this.showSuccess("OTP resent successfully");
+      this.showSuccess('OTP resent successfully');
 
       // Restart countdown
       this.startResendCountdown();
     } catch (error) {
-      this.showError(error.message || "Failed to resend OTP");
+      this.showError(error.message || 'Failed to resend OTP');
     }
   }
 
@@ -461,8 +436,8 @@ export class LoginModal {
    */
   startResendCountdown() {
     this.resendCountdown = 60;
-    const resendBtn = document.getElementById("resendBtn");
-    const countdownEl = document.getElementById("countdown");
+    const resendBtn = document.getElementById('resendBtn');
+    const countdownEl = document.getElementById('countdown');
 
     if (!resendBtn || !countdownEl) return;
 
@@ -475,7 +450,7 @@ export class LoginModal {
       if (this.resendCountdown <= 0) {
         this.clearResendTimer();
         resendBtn.disabled = false;
-        resendBtn.innerHTML = "Resend OTP";
+        resendBtn.innerHTML = 'Resend OTP';
       }
     }, 1000);
   }
@@ -495,7 +470,7 @@ export class LoginModal {
    * @param {string} message - Error message
    */
   showError(message) {
-    this.showToast(message, "error");
+    this.showToast(message, 'error');
   }
 
   /**
@@ -503,7 +478,7 @@ export class LoginModal {
    * @param {string} message - Success message
    */
   showSuccess(message) {
-    this.showToast(message, "success");
+    this.showToast(message, 'success');
   }
 
   /**
@@ -511,19 +486,19 @@ export class LoginModal {
    * @param {string} message - Toast message
    * @param {string} type - Toast type ('success' or 'error')
    */
-  showToast(message, type = "success") {
-    const toast = document.getElementById("toast");
-    const toastMessage = document.getElementById("toastMessage");
+  showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
 
     if (!toast || !toastMessage) return;
 
     toastMessage.textContent = message;
-    toast.className = `toast ${type === "error" ? "toast-error" : ""}`;
+    toast.className = `toast ${type === 'error' ? 'toast-error' : ''}`;
     toast.hidden = false;
-    toast.classList.add("show");
+    toast.classList.add('show');
 
     setTimeout(() => {
-      toast.classList.remove("show");
+      toast.classList.remove('show');
       setTimeout(() => {
         toast.hidden = true;
       }, 300);

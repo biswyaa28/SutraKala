@@ -192,14 +192,71 @@
       transform: translateY(0);
     }
 
-    /* ── Responsive grid ── */
-    @media (max-width: 1023px) {
-      .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    /* ── Responsive grid - Mobile & Tablet Optimized ── */
+    @media (max-width: 480px) {
+      .shop-grid { 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      
+      .shop-hero {
+        padding: calc(60px + 2rem) 0 2rem;
+      }
+      
+      .shop-hero h1 {
+        font-size: clamp(1.75rem, 7vw, 2.25rem);
+      }
+      
+      .shop-card-body {
+        padding: 1rem;
+      }
+      
+      .shop-card-footer {
+        padding: 0 1rem 1rem;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .btn-inquire {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+        padding: 12px 16px;
+        font-size: 0.875rem;
+      }
+      
+      .shop-card-name {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+      }
+      
+      .shop-card-desc {
+        font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+      }
     }
 
-    @media (max-width: 599px) {
-      .shop-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .shop-section { padding: var(--spacing-xxl) 0; }
+    @media (min-width: 481px) and (max-width: 767px) {
+      .shop-grid { 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      
+      .btn-inquire {
+        min-height: 44px;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .shop-grid { 
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .shop-grid { 
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+      }
     }
 
     /* ── Active nav link ── */
@@ -227,7 +284,7 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">
-          <a href="index.html" aria-label="SutraKala Home">
+          <a href="/" aria-label="SutraKala Home">
             <picture>
               <source srcset="assets/images/logo.webp" type="image/webp">
               <img src="assets/images/logo.jpg?v=2" alt="Logo" class="site-logo">
@@ -282,163 +339,8 @@
     <!-- Product Grid -->
     <section class="shop-section">
       <div class="container">
-        <div class="shop-grid">
-
-          <!-- Product 1 -->
-          <article class="shop-card fade-in-up" data-product-id="1">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=500&h=500&fit=crop"
-                alt="Cream-colored crochet infinity scarf with delicate lace pattern" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Elegant Infinity Scarf</h2>
-              <p class="shop-card-desc">Soft cream-colored scarf with intricate lace detailing. Lightweight, perfect for any season.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹1,299</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Elegant Infinity Scarf" data-price="1299" aria-label="Add Elegant Infinity Scarf to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 2 -->
-          <article class="shop-card fade-in-up delay-1" data-product-id="2">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1558223689-8f8d1a9c6f5e?w=500&h=500&fit=crop"
-                alt="Pastel crochet stuffed bunny and bear amigurumi toys in a basket" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Adorable Amigurumi Set</h2>
-              <p class="shop-card-desc">Handmade stuffed toys in soft pastel colors. Safe and gentle for little ones.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹899</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Adorable Amigurumi Set" data-price="899" aria-label="Add Adorable Amigurumi Set to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 3 -->
-          <article class="shop-card fade-in-up delay-2" data-product-id="3">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1579656381226-5fc703648680?w=500&h=500&fit=crop"
-                alt="Lavender crochet cushion cover with traditional mandala design" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Mandala Cushion Cover</h2>
-              <p class="shop-card-desc">Beautiful lavender cushion with a traditional mandala pattern. 16×16 inches.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹1,599</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Mandala Cushion Cover" data-price="1599" aria-label="Add Mandala Cushion Cover to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 4 -->
-          <article class="shop-card fade-in-up" data-product-id="4">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&h=500&fit=crop"
-                alt="White crochet baby booties with pink floral embroidery" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Baby Booties Set</h2>
-              <p class="shop-card-desc">Delicate white booties with floral embroidery. Fits newborns up to 6 months.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹699</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Baby Booties Set" data-price="699" aria-label="Add Baby Booties Set to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 5 -->
-          <article class="shop-card fade-in-up delay-1" data-product-id="5">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1605218427368-35b861218042?w=500&h=500&fit=crop"
-                alt="Mint green crochet table runner with scalloped edges on a wooden table" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Table Runner</h2>
-              <p class="shop-card-desc">Elegant mint green table runner with scalloped edges. 60 inches long, heirloom quality.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹1,899</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Table Runner" data-price="1899" aria-label="Add Table Runner to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 6 -->
-          <article class="shop-card fade-in-up delay-2" data-product-id="6">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1616606015525-4c0e9f8f8a9e?w=500&h=500&fit=crop"
-                alt="Peach-toned crochet market tote bag with sturdy handles" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Market Tote Bag</h2>
-              <p class="shop-card-desc">Eco-friendly peach-toned shopping bag. Sturdy, spacious, and sustainably handcrafted.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹1,099</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Market Tote Bag" data-price="1099" aria-label="Add Market Tote Bag to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 7 -->
-          <article class="shop-card fade-in-up" data-product-id="7">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=500&h=500&fit=crop"
-                alt="Pink crochet headband adorned with delicate flower details" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Floral Headband</h2>
-              <p class="shop-card-desc">Pretty pink headband adorned with crochet flowers. One size fits all, adjustable.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹499</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Floral Headband" data-price="499" aria-label="Add Floral Headband to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Product 8 -->
-          <article class="shop-card fade-in-up delay-1" data-product-id="8">
-            <div class="shop-card-image">
-              <img src="https://images.unsplash.com/photo-1606232099478-3e5d8e4c0f6e?w=500&h=500&fit=crop"
-                alt="Lavender crochet boho wall hanging with decorative tassels" loading="lazy">
-            </div>
-            <div class="shop-card-body">
-              <h2 class="shop-card-name">Boho Wall Hanging</h2>
-              <p class="shop-card-desc">Statement wall décor in lavender with bohemian tassels. 24 inches wide.</p>
-            </div>
-            <div class="shop-card-footer">
-              <span class="shop-card-price">₹2,199</span>
-              <button class="btn-inquire btn-add-to-cart" data-product="Boho Wall Hanging" data-price="2199" aria-label="Add Boho Wall Hanging to cart">
-                <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
-              </button>
-            </div>
-          </article>
-
-          <!-- Custom Order Card -->
-          <article class="shop-card fade-in-up delay-2" style="background: linear-gradient(135deg, #FDFBFD, #EBDEF0); border: 1.5px dashed #8E44AD; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; min-height: 340px;">
-            <i class="fas fa-paint-brush" style="font-size: 2rem; color: #8E44AD; margin-bottom: 1rem;" aria-hidden="true"></i>
-            <h2 class="shop-card-name" style="margin-bottom: 0.5rem;">Custom Order</h2>
-            <p class="shop-card-desc" style="color: #7A7A7A; margin-bottom: 1.5rem;">Something specific in mind? We love custom requests — your color, your size, your design.</p>
-            <a href="https://wa.me/919103329604?text=Hi!+I'd+like+to+discuss+a+custom+crochet+order."
-              class="btn-inquire" target="_blank" rel="noopener" aria-label="Request a custom crochet order via WhatsApp">
-              <i class="fab fa-whatsapp" aria-hidden="true"></i> Let's Talk
-            </a>
-          </article>
-
+        <div class="shop-grid" id="shopProductsGrid">
+          <!-- Products loaded dynamically from Sanity CMS -->
         </div>
       </div>
     </section>
@@ -449,7 +351,7 @@
     <div class="container">
       <div class="footer-compact">
         <div class="footer-brand">
-          <a href="index.html" class="footer-logo group">
+          <a href="/" class="footer-logo group">
             <picture>
               <source srcset="assets/images/logo.webp" type="image/webp">
               <img src="assets/images/logo.jpg" alt="SutraKala Logo" class="footer-site-logo spin-on-hover">
@@ -483,7 +385,7 @@
 
       <div class="footer-bottom-compact">
         <p>&copy; 2026 SutraKala. &nbsp;
-          <a href="index.html" style="color: inherit; text-decoration: underline; opacity: 0.7;">← Back to Home</a>
+          <a href="/" style="color: inherit; text-decoration: underline; opacity: 0.7;">← Back to Home</a>
         </p>
         <p class="footer-made-with">Made with 🧶 in Jammu, India</p>
       </div>

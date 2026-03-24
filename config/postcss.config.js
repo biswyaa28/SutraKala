@@ -1,7 +1,17 @@
 // PostCSS Configuration
 // config/postcss.config.js
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const projectRoot = resolve(__dirname, '..');
+
 export default {
   plugins: {
+    'postcss-import': {
+      root: resolve(projectRoot, 'src/styles')
+    },
     autoprefixer: {
       overrideBrowserslist: ['>0.2%', 'not dead', 'not op_mini all', 'last 2 versions']
     },
